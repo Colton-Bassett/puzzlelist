@@ -106,9 +106,35 @@ const MostFollowedList: React.FC = () => {
 	);
 };
 
+const DiscoverMoreList: React.FC = () => {
+	return (
+		<div className="flex">
+			{[...puzzles, puzzles[0]].map((puzzle) => (
+				<div
+					key={puzzle.id}
+					className="h- mb-3 mr-4 mt-1 w-40 rounded-xl border border-gray-200 bg-white"
+					style={{ height: "242px" }}
+				>
+					<div className="flex h-full flex-col px-3 py-2">
+						<div className="mr-3">img</div>
+						<div className="mb-5 flex">{puzzle.name}</div>
+						<div className="flex max-h-28 overflow-hidden">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quam
+							quam, sollicitudin vitae
+						</div>
+						<div className="mt-auto">
+							<span className="flex items-center justify-end">+</span>
+						</div>
+					</div>
+				</div>
+			))}
+		</div>
+	);
+};
+
 export default function Home() {
 	return (
-		<div className="font-[family-name:var(--font-geist-sans)]">
+		<div className="">
 			<main className="flex h-full w-full flex-col">
 				<div className="min-h-full min-w-full">
 					<div className="h-20" style={{ backgroundColor: "#F8F9FA" }}></div>
@@ -117,7 +143,7 @@ export default function Home() {
 						style={{ backgroundImage: "url(/landingpage.svg)" }}
 					></div>
 				</div>
-				<div className="m-auto flex h-full w-full max-w-5xl flex-col">
+				<div className="m-auto flex h-full w-full max-w-5xl flex-col pb-6">
 					<div className="mt-3 flex h-16 w-full items-center rounded-xl border border-gray-200 p-3 pl-5">
 						<ListSvg />
 						<div className="ml-6 flex-1 flex-col">
@@ -154,7 +180,7 @@ export default function Home() {
 
 							<div className="mb-4 ml-6 rounded-xl border border-gray-200 p-4">
 								<div className="flex flex-col">
-									<div className="h-12" style={{ fontSize: "18px" }}>
+									<div className="h-12 text-lg">
 										Most followed on Puzzle List
 									</div>
 									<MostFollowedList />
@@ -163,54 +189,19 @@ export default function Home() {
 						</div>
 					</div>
 				</div>
+				<div className="bg-gray-50">
+					<div className="m-auto max-w-5xl py-6">
+						<section>
+							<div className="text-lg">Discover more</div>
+							<div className="mb-3 mt-2 flex">
+								<div className="mr-2">You may be interested in</div>
+								<div>i</div>
+							</div>
+							<DiscoverMoreList />
+						</section>
+					</div>
+				</div>
 			</main>
-			{/* <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-				<a
-					className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-					href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<Image
-						aria-hidden
-						src="https://nextjs.org/icons/file.svg"
-						alt="File icon"
-						width={16}
-						height={16}
-					/>
-					Learn
-				</a>
-				<a
-					className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-					href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<Image
-						aria-hidden
-						src="https://nextjs.org/icons/window.svg"
-						alt="Window icon"
-						width={16}
-						height={16}
-					/>
-					Examples
-				</a>
-				<a
-					className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-					href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<Image
-						aria-hidden
-						src="https://nextjs.org/icons/globe.svg"
-						alt="Globe icon"
-						width={16}
-						height={16}
-					/>
-					Go to nextjs.org →
-				</a>
-			</footer> */}
 		</div>
 	);
 }

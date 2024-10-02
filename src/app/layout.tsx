@@ -3,6 +3,7 @@ import "./globals.css";
 import TopNav from "./_components/topnav";
 
 import { Roboto_Flex } from "next/font/google";
+import Footer from "./_components/footer";
 
 const roboto = Roboto_Flex({ subsets: ["latin"] });
 
@@ -20,8 +21,9 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={roboto.className}>
-				<TopNav></TopNav>
+				<TopNav />
 				{children}
+				<Footer />
 			</body>
 		</html>
 	);
