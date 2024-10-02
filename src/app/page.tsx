@@ -58,7 +58,7 @@ const PuzzleList: React.FC = () => {
 			{[...puzzles, ...puzzles, ...puzzles].map((puzzle) => (
 				<li
 					key={puzzle.id}
-					className="flex items-center border-t border-gray-200 h-14"
+					className="flex h-14 items-center border-t border-gray-200"
 				>
 					<div className="flex flex-1 overflow-hidden">
 						<div className="mr-3">img</div>
@@ -67,12 +67,12 @@ const PuzzleList: React.FC = () => {
 
 					<a
 						href={puzzle.url}
-						className="flex justify-end text-blue-500 hover:underline "
+						className="flex justify-end text-blue-500 hover:underline"
 						style={{ width: "348px" }}
 					>
 						{puzzle.url}
 					</a>
-					<span className="flex justify-center items-center w-12">
+					<span className="flex w-12 items-center justify-center">
 						{puzzle.completed ? "✅" : "❌"}
 					</span>
 				</li>
@@ -87,20 +87,17 @@ const MostFollowedList: React.FC = () => {
 			{puzzles.slice(0, 4).map((puzzle) => (
 				<li
 					key={puzzle.id}
-					className="flex items-center border-t border-gray-200 h-24"
+					className="flex h-24 items-center border-t border-gray-200"
 				>
 					<div className="flex flex-1 flex-col overflow-hidden">
 						<div className="mr-3">img</div>
 						<div className="flex flex-1">{puzzle.name}</div>
-						<a
-							href={puzzle.url}
-							className="flex text-blue-500 hover:underline "
-						>
+						<a href={puzzle.url} className="flex text-blue-500 hover:underline">
 							{puzzle.url}
 						</a>
 					</div>
 
-					<span className="flex justify-center items-center w-12">
+					<span className="flex w-12 items-center justify-center">
 						{puzzle.followed ? "✅" : "❌"}
 					</span>
 				</li>
@@ -114,19 +111,16 @@ export default function Home() {
 		<div className="font-[family-name:var(--font-geist-sans)]">
 			<main className="flex h-full w-full flex-col">
 				<div className="min-h-full min-w-full">
+					<div className="h-20" style={{ backgroundColor: "#F8F9FA" }}></div>
 					<div
-						className="h-20"
-						style={{ backgroundColor: "#F8F9FA" }}
-					></div>
-					<div
-						className="bg-bottom bg-no-repeat h-40"
+						className="h-40 bg-bottom bg-no-repeat"
 						style={{ backgroundImage: "url(/landingpage.svg)" }}
 					></div>
 				</div>
-				<div className="flex h-full flex-col max-w-5xl w-full m-auto">
-					<div className="flex w-full items-center border border-gray-200 mt-3 p-3 pl-5 rounded-xl h-16">
+				<div className="m-auto flex h-full w-full max-w-5xl flex-col">
+					<div className="mt-3 flex h-16 w-full items-center rounded-xl border border-gray-200 p-3 pl-5">
 						<ListSvg />
-						<div className="flex-1 ml-6 flex-col">
+						<div className="ml-6 flex-1 flex-col">
 							<div className="text-sm">Build a watchlist</div>
 							<div className="text-xs">
 								Sign in to track DLEs you care about
@@ -135,7 +129,7 @@ export default function Home() {
 						<button>Sign in</button>
 					</div>
 
-					<div className="flex max-w-5xl w-full m-auto mt-6">
+					<div className="m-auto mt-6 flex w-full max-w-5xl">
 						<div
 							className="flex w-8/12 flex-col overflow-hidden"
 							style={{ maxHeight: "610px" }}
@@ -146,25 +140,21 @@ export default function Home() {
 							<PuzzleList />
 						</div>
 						<div className="w-4/12">
-							<div className="border border-gray-200 rounded-xl p-4 ml-6 mb-4">
+							<div className="mb-4 ml-6 rounded-xl border border-gray-200 p-4">
 								<div className="flex">
 									<div className="mr-3">Box</div>
 									<div>
-										Create a list to view your daily puzzles
-										in one place
+										Create a list to view your daily puzzles in one place
 									</div>
 								</div>
-								<div className="border border-gray-200 mt-3 p-1 rounded-2xl flex justify-center">
+								<div className="mt-3 flex justify-center rounded-2xl border border-gray-200 p-1">
 									<button>+ New list</button>
 								</div>
 							</div>
 
-							<div className="border border-gray-200 rounded-xl p-4 ml-6 mb-4">
+							<div className="mb-4 ml-6 rounded-xl border border-gray-200 p-4">
 								<div className="flex flex-col">
-									<div
-										className="h-12"
-										style={{ fontSize: "18px" }}
-									>
+									<div className="h-12" style={{ fontSize: "18px" }}>
 										Most followed on Puzzle List
 									</div>
 									<MostFollowedList />
