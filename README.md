@@ -13,6 +13,8 @@ TBD
 - [ ] Add authentication (Auth0)
 - [ ] Refine schema
 - [ ] Connect users to database
+- [ ] Add user POST
+- [ ] Add user DELETE
 - [ ] Refine UI
 - [ ] Add additional functionality (TBD)
 - [ ] Delete button, dndkit, routing, analytics, shadcn, server actions
