@@ -8,12 +8,11 @@ TBD
 - [x] Setup environment
 - [x] Scaffold basic UI
 - [x] Setup mock data
+- [x] Setup basic Prisma SQLite database
 - [ ] Deploy on Vercel
-- [ ] Brainstorm schema
-- [ ] Setup database
-- [ ] Setup Prisma
 - [ ] Add authentication (Auth0)
-- [ ] Hook-in database to UI
+- [ ] Refine schema
+- [ ] Connect users to database
 - [ ] Refine UI
 - [ ] Add additional functionality (TBD)
 - [ ] Delete button, dndkit, routing, analytics, shadcn, server actions
@@ -23,6 +22,12 @@ TBD
 ```bash
 pnpm dev
 # launch development server with live reloading, updates, and debugging.
+
+pnpm prisma db push
+# push changes to schema from prisma to database
+
+pnpm prisma studio
+# view local database in web browser
 
 git add -p
 # stage each change interactively, accept or skip specific changes.

@@ -1,61 +1,23 @@
+import prisma from "@/lib/db";
 import ListSvg from "./_components/listsvg";
 
 interface Puzzle {
 	id: string;
-	icon_url: string;
+	iconUrl: string;
 	name: string;
 	url: string;
-	followed: boolean;
-	completed: boolean;
+	description: string | null;
+	updatedAt: Date;
+	createdAt: Date;
 }
 
-const puzzles: Puzzle[] = [
-	{
-		id: "1",
-		icon_url: "https://example.com/icon1.png",
-		name: "Puzzle One",
-		url: "https://example.com/task1",
-		followed: false,
-		completed: false,
-	},
-	{
-		id: "2",
-		icon_url: "https://example.com/icon2.png",
-		name: "Puzzle Two",
-		url: "https://example.com/task2",
-		followed: false,
-		completed: true,
-	},
-	{
-		id: "3",
-		icon_url: "https://example.com/icon3.png",
-		name: "Puzzle Three",
-		url: "https://example.com/task3",
-		followed: false,
-		completed: false,
-	},
-	{
-		id: "4",
-		icon_url: "https://example.com/icon4.png",
-		name: "Puzzle Four",
-		url: "https://example.com/task4",
-		followed: false,
-		completed: true,
-	},
-	{
-		id: "5",
-		icon_url: "https://example.com/icon5.png",
-		name: "Puzzle Five",
-		url: "https://example.com/task5",
-		followed: false,
-		completed: false,
-	},
-];
-
-const UserPuzzles: React.FC = () => {
+interface PuzzleProps {
+	puzzles: Puzzle[];
+}
+const UserPuzzles: React.FC<PuzzleProps> = ({ puzzles }) => {
 	return (
 		<ul className="list-disc">
-			{[...puzzles, ...puzzles, ...puzzles].map((puzzle) => (
+			{[...puzzles].map((puzzle) => (
 				<li
 					key={puzzle.id}
 					className="flex h-14 items-center border-t border-gray-200"
@@ -72,21 +34,19 @@ const UserPuzzles: React.FC = () => {
 					>
 						{puzzle.url}
 					</a>
-					<span className="flex w-12 items-center justify-center">
-						{puzzle.completed ? "✅" : "❌"}
-					</span>
+					<span className="flex w-12 items-center justify-center">{"✅"}</span>
 				</li>
 			))}
 		</ul>
 	);
 };
 
-const MostFollowedPuzzles: React.FC = () => {
+const MostFollowedPuzzles: React.FC<PuzzleProps> = ({ puzzles }) => {
 	return (
 		<ul className="list-disc">
 			{puzzles.slice(0, 4).map((puzzle) => (
 				<li
-					key={puzzle.id}
+					key={puzzle.id + "m"}
 					className="flex h-24 items-center border-t border-gray-200"
 				>
 					<div className="flex flex-1 flex-col overflow-hidden">
@@ -97,21 +57,19 @@ const MostFollowedPuzzles: React.FC = () => {
 						</a>
 					</div>
 
-					<span className="flex w-12 items-center justify-center">
-						{puzzle.followed ? "✅" : "❌"}
-					</span>
+					<span className="flex w-12 items-center justify-center">{"✅"}</span>
 				</li>
 			))}
 		</ul>
 	);
 };
 
-const RecommendedPuzzles: React.FC = () => {
+const RecommendedPuzzles: React.FC<PuzzleProps> = ({ puzzles }) => {
 	return (
 		<div className="flex">
-			{[...puzzles, puzzles[0]].map((puzzle) => (
+			{[...puzzles].map((puzzle) => (
 				<div
-					key={puzzle.id}
+					key={puzzle.id + "r"}
 					className="h- mb-3 mr-4 mt-1 w-40 rounded-xl border border-gray-200 bg-white"
 					style={{ height: "242px" }}
 				>
@@ -119,8 +77,7 @@ const RecommendedPuzzles: React.FC = () => {
 						<div className="mr-3">img</div>
 						<div className="mb-5 flex">{puzzle.name}</div>
 						<div className="flex max-h-28 overflow-hidden">
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quam
-							quam, sollicitudin vitae
+							{puzzle.description}
 						</div>
 						<div className="mt-auto">
 							<span className="flex items-center justify-end">+</span>
@@ -132,7 +89,9 @@ const RecommendedPuzzles: React.FC = () => {
 	);
 };
 
-export default function Home() {
+export default async function Home() {
+	const puzzles = await prisma.puzzles.findMany();
+
 	return (
 		<div className="">
 			<main className="flex h-full w-full flex-col">
@@ -163,7 +122,7 @@ export default function Home() {
 							<div className="mb-2" style={{ fontSize: "18px" }}>
 								Your daily puzzles
 							</div>
-							<UserPuzzles />
+							<UserPuzzles puzzles={puzzles} />
 						</div>
 						<div className="w-4/12">
 							<div className="mb-4 ml-6 rounded-xl border border-gray-200 p-4">
@@ -183,7 +142,7 @@ export default function Home() {
 									<div className="h-12 text-lg">
 										Most followed on Puzzle List
 									</div>
-									<MostFollowedPuzzles />
+									<MostFollowedPuzzles puzzles={puzzles} />
 								</div>
 							</div>
 						</div>
@@ -197,7 +156,7 @@ export default function Home() {
 								<div className="mr-2">You may be interested in</div>
 								<div>i</div>
 							</div>
-							<RecommendedPuzzles />
+							<RecommendedPuzzles puzzles={puzzles} />
 						</section>
 					</div>
 				</div>
