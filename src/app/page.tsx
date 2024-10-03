@@ -52,7 +52,7 @@ const puzzles: Puzzle[] = [
 	},
 ];
 
-const PuzzleList: React.FC = () => {
+const UserPuzzles: React.FC = () => {
 	return (
 		<ul className="list-disc">
 			{[...puzzles, ...puzzles, ...puzzles].map((puzzle) => (
@@ -81,7 +81,7 @@ const PuzzleList: React.FC = () => {
 	);
 };
 
-const MostFollowedList: React.FC = () => {
+const MostFollowedPuzzles: React.FC = () => {
 	return (
 		<ul className="list-disc">
 			{puzzles.slice(0, 4).map((puzzle) => (
@@ -106,7 +106,7 @@ const MostFollowedList: React.FC = () => {
 	);
 };
 
-const DiscoverMoreList: React.FC = () => {
+const RecommendedPuzzles: React.FC = () => {
 	return (
 		<div className="flex">
 			{[...puzzles, puzzles[0]].map((puzzle) => (
@@ -163,7 +163,7 @@ export default function Home() {
 							<div className="mb-2" style={{ fontSize: "18px" }}>
 								Your daily puzzles
 							</div>
-							<PuzzleList />
+							<UserPuzzles />
 						</div>
 						<div className="w-4/12">
 							<div className="mb-4 ml-6 rounded-xl border border-gray-200 p-4">
@@ -183,7 +183,7 @@ export default function Home() {
 									<div className="h-12 text-lg">
 										Most followed on Puzzle List
 									</div>
-									<MostFollowedList />
+									<MostFollowedPuzzles />
 								</div>
 							</div>
 						</div>
@@ -197,7 +197,7 @@ export default function Home() {
 								<div className="mr-2">You may be interested in</div>
 								<div>i</div>
 							</div>
-							<DiscoverMoreList />
+							<RecommendedPuzzles />
 						</section>
 					</div>
 				</div>
