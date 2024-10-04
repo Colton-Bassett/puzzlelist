@@ -9,7 +9,9 @@ TBD
 - [x] Scaffold basic UI
 - [x] Setup mock data
 - [x] Setup basic Prisma SQLite database
-- [ ] Deploy on Vercel
+- [x] Update to Prisma Postgresql database
+- [x] Deploy on Vercel
+- [ ] Setup Prisma seeding & migration
 - [ ] Add authentication (Auth0)
 - [ ] Refine schema
 - [ ] Connect users to database
