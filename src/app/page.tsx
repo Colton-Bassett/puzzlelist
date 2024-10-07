@@ -3,6 +3,7 @@ import RecommendedPuzzles from "./_components/home/recommendedPuzzles";
 import MostFollowedPuzzles from "./_components/home/mostFollowedPuzzles";
 import UserPuzzles from "./_components/home/userPuzzles";
 import UserEngagementPrompt from "./_components/home/userEngagementPrompt";
+import CreatePuzzleList from "./_components/home/createPuzzleList";
 
 export default async function Home() {
 	const puzzles = await prisma.puzzles.findMany();
@@ -23,17 +24,7 @@ export default async function Home() {
 					<div className="m-auto mt-6 flex w-full max-w-5xl">
 						<UserPuzzles puzzles={puzzles} />
 						<div className="w-4/12">
-							<div className="mb-4 ml-6 rounded-xl border border-gray-200 p-4">
-								<div className="flex">
-									<div className="mr-3">Box</div>
-									<div>
-										Create a list to view your daily puzzles in one place
-									</div>
-								</div>
-								<div className="mt-3 flex justify-center rounded-2xl border border-gray-200 p-1">
-									<button>+ New list</button>
-								</div>
-							</div>
+							<CreatePuzzleList />
 							<MostFollowedPuzzles puzzles={puzzles} />
 						</div>
 					</div>
