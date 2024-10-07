@@ -1,5 +1,5 @@
 import { Puzzle } from "../../types";
-import AddPuzzleButton from "../ui/addPuzzleButton";
+import AddPuzzleButton from "./addPuzzleButton";
 
 interface PuzzleProps {
 	puzzles: Puzzle[];
