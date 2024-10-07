@@ -4,6 +4,8 @@ export default async function TopNav() {
 	const session = await getSession();
 	const user = session?.user;
 
+	// console.log(user);
+
 	return (
 		<nav className="flex h-16 w-full items-center justify-between p-5 px-6 text-xl font-semibold">
 			<div className="flex-1">
@@ -12,7 +14,7 @@ export default async function TopNav() {
 			</div>
 
 			{user ? (
-				<a href="/api/auth/logout">Logout, {user.name}</a>
+				<a href="/api/auth/logout">Logout, {user.user_id}</a>
 			) : (
 				<a href="/api/auth/login">Login</a>
 			)}
