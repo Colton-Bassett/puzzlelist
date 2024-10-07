@@ -4,6 +4,7 @@ import TopNav from "./_components/topnav";
 
 import { Roboto_Flex } from "next/font/google";
 import Footer from "./_components/footer";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
 
 const roboto = Roboto_Flex({ subsets: ["latin"] });
 
@@ -20,11 +21,19 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={roboto.className}>
+			<UserProvider>
+				<body className={roboto.className}>
+					<TopNav />
+					{children}
+					<Footer />
+				</body>
+			</UserProvider>
+
+			{/* <body className={roboto.className}>
 				<TopNav />
 				{children}
 				<Footer />
-			</body>
+			</body> */}
 		</html>
 	);
 }

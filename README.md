@@ -37,3 +37,8 @@ git add -p
 # stage each change interactively, accept or skip specific changes.
 # [y: stage, n: skip, q: quit, a: all, d: skip all, e: edit]
 ```
+
+## Misc
+
+- Vercel: gh
+- Auth0: gh
