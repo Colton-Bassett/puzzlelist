@@ -12,7 +12,7 @@ TBD
 - [x] Update to Prisma Postgresql database
 - [x] Deploy on Vercel
 - [ ] Setup Prisma seeding & migration
-- [ ] Add authentication (Auth0)
+- [x] Add authentication (Auth0)
 - [ ] Refine schema
 - [ ] Connect users to database
 - [ ] Add user POST
@@ -20,6 +20,7 @@ TBD
 - [ ] Refine UI
 - [ ] Add additional functionality (TBD)
 - [ ] Delete button, dndkit, routing, analytics, shadcn, server actions
+- [ ] Fix gap between footer and main
 
 ## Scripts
 

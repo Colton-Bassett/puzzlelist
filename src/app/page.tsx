@@ -1,5 +1,6 @@
 import prisma from "@/lib/db";
 import ListSvg from "./_components/listsvg";
+import AddPuzzleButton from "./_components/ui/addpuzzlebutton";
 
 interface Puzzle {
 	id: string;
@@ -34,7 +35,9 @@ const UserPuzzles: React.FC<PuzzleProps> = ({ puzzles }) => {
 					>
 						{puzzle.url}
 					</a>
-					<span className="flex w-12 items-center justify-center">{"✅"}</span>
+					<div className="ml-6 flex items-center justify-center">
+						<AddPuzzleButton />
+					</div>
 				</li>
 			))}
 		</ul>
@@ -57,7 +60,9 @@ const MostFollowedPuzzles: React.FC<PuzzleProps> = ({ puzzles }) => {
 						</a>
 					</div>
 
-					<span className="flex w-12 items-center justify-center">{"✅"}</span>
+					<div className="flex w-12 items-center justify-center">
+						<AddPuzzleButton />
+					</div>
 				</li>
 			))}
 		</ul>
@@ -79,8 +84,8 @@ const RecommendedPuzzles: React.FC<PuzzleProps> = ({ puzzles }) => {
 						<div className="flex max-h-28 overflow-hidden">
 							{puzzle.description}
 						</div>
-						<div className="mt-auto">
-							<span className="flex items-center justify-end">+</span>
+						<div className="mt-auto flex min-w-full justify-end">
+							<AddPuzzleButton />
 						</div>
 					</div>
 				</div>

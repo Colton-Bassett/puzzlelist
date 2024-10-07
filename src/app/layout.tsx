@@ -28,12 +28,6 @@ export default function RootLayout({
 					<Footer />
 				</body>
 			</UserProvider>
-
-			{/* <body className={roboto.className}>
-				<TopNav />
-				{children}
-				<Footer />
-			</body> */}
 		</html>
 	);
 }
