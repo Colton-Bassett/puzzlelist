@@ -9,6 +9,8 @@ import {
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 
+// TODO replace 'any' types. Add error handling. Think about response numbers?? Add name or email to User schema.
+
 // export const GET = handleAuth();
 
 export const GET = handleAuth({
@@ -29,6 +31,25 @@ const afterCallback = async (req: any, session: any, state: any) => {
 		// permanentRedirect('/verify-email')
 		// res.status(200).redirect('/verify-email')
 		console.log("user found", session.user);
+		const user = session.user;
+
+		const existingUser = await prisma.user.findUnique({
+			where: {
+				auth0Sub: user.sub,
+			},
+		});
+
+		if (!existingUser) {
+			console.log("creating new user");
+			// Create new user
+			await prisma.user.create({
+				data: {
+					auth0Sub: user.sub,
+				},
+			});
+		} else {
+			console.log("user exists in db");
+		}
 	} else {
 		console.log("user not found", session);
 	}
