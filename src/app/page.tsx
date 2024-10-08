@@ -4,9 +4,10 @@ import MostFollowedPuzzles from "./_components/home/mostFollowedPuzzles";
 import UserPuzzles from "./_components/home/userPuzzles";
 import UserEngagementPrompt from "./_components/home/userEngagementPrompt";
 import CreatePuzzleList from "./_components/home/createPuzzleList";
+import { createPuzzle } from "@/actions/actions";
 
 export default async function Home() {
-	const puzzles = await prisma.puzzles.findMany();
+	const puzzles = await prisma.puzzle.findMany();
 
 	return (
 		<div className="">
@@ -17,6 +18,31 @@ export default async function Home() {
 						className="h-40 bg-bottom bg-no-repeat"
 						style={{ backgroundImage: "url(/landingpage.svg)" }}
 					></div>
+				</div>
+				<div className="flex items-center justify-center">
+					<form
+						action={createPuzzle}
+						className="flex w-[300px] flex-col gap-y-2"
+					>
+						<input
+							type="text"
+							name="name"
+							placeholder="Name"
+							className="rounded-sm px-2 py-1"
+						/>
+						<textarea
+							name="url"
+							rows={5}
+							placeholder="Url"
+							className="rounded-sm px-2 py-1"
+						/>
+						<button
+							type="submit"
+							className="rounded-sm bg-blue-500 py-2 text-white"
+						>
+							Create puzzle
+						</button>
+					</form>
 				</div>
 				<div className="m-auto flex h-full w-full max-w-5xl flex-col pb-6">
 					<UserEngagementPrompt />
