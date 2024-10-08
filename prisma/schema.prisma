@@ -8,6 +8,13 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
+model User {
+    id String @id @default(cuid())
+    auth0Sub String @unique
+
+    @@map("puzzlelist_users")
+}
+
 model Puzzle {
   id          String   @id @default(cuid())
   iconUrl     String
