@@ -3,6 +3,20 @@
 import prisma from "@/lib/db";
 import { revalidatePath } from "next/cache";
 
+// USER
+
+export async function createUser() {
+	// runs after auth0 sign in success
+	// how should the logic be?
+	// goal = link auth0 user to their postgres puzzlelist that's associated with their auth0 id
+	// ACTIONS
+	// add self-authored puzzles
+	// delete self-authored puzzles
+	// add existing puzzles
+	// remove existing puzzles
+}
+
+// PUZZLE
 export async function createPuzzle(formData: FormData) {
 	await prisma.puzzle.create({
 		data: {
@@ -18,7 +32,7 @@ export async function createPuzzle(formData: FormData) {
 }
 
 // not implemented in UI
-export async function editPost(formData: FormData, id: string) {
+export async function editPuzzle(formData: FormData, id: string) {
 	await prisma.puzzle.update({
 		where: { id },
 		data: {
