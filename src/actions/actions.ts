@@ -17,6 +17,18 @@ export async function createUser() {
 	// remove existing puzzles
 }
 
+export async function addPuzzleToUser(auth0Sub: string, puzzleId: string) {
+	console.log("addPuzzleToUser...");
+	await prisma.user.update({
+		where: { auth0Sub },
+		data: {
+			userPuzzles: {
+				connect: { id: puzzleId },
+			},
+		},
+	});
+}
+
 // PUZZLE
 export async function createPuzzle(formData: FormData) {
 	try {
