@@ -3,7 +3,7 @@ import { handleAuth, Session, handleCallback } from "@auth0/nextjs-auth0";
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest } from "next/server";
 
-// TODO replace 'any' types. Add error handling. Think about response numbers?? Add name or email to User schema.
+// TODO add error handling. Think about response numbers. Add name or email to User schema.
 
 // export const GET = handleAuth();
 

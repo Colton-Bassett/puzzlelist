@@ -1,6 +1,7 @@
 "use server";
 
 import prisma from "@/lib/db";
+import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
 // USER
@@ -18,14 +19,21 @@ export async function createUser() {
 
 // PUZZLE
 export async function createPuzzle(formData: FormData) {
-	await prisma.puzzle.create({
-		data: {
-			// add soft validation
-			iconUrl: "https://example.com",
-			name: formData.get("name") as string,
-			url: formData.get("url") as string,
-		},
-	});
+	try {
+		await prisma.puzzle.create({
+			data: {
+				// add soft validation
+				iconUrl: "https://example.com",
+				name: formData.get("name") as string,
+				url: formData.get("url") as string,
+			},
+		});
+	} catch (error) {
+		if (error instanceof Prisma.PrismaClientKnownRequestError) {
+			console.log("Prisma error:", error.code);
+		}
+		throw error;
+	}
 
 	// refresh ui to display new puzzles
 	revalidatePath("/");

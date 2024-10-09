@@ -31,6 +31,9 @@ pnpm dev
 pnpm prisma db push
 # push changes to schema from prisma to database
 
+pnpm prisma generate
+# regenerates prisma client (use after schema changes)
+
 pnpm prisma studio
 # view local database in web browser
 
