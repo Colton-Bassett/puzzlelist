@@ -19,11 +19,7 @@ export const GET = handleAuth({
 	},
 });
 
-const afterCallback = async (
-	req: NextRequest,
-	session: Session,
-	state: any,
-) => {
+const afterCallback = async (req: NextRequest, session: Session) => {
 	console.log("I am getting called after callback", session);
 	if (session.user) {
 		// permanentRedirect('/verify-email')
