@@ -1,20 +1,14 @@
 import prisma from "@/lib/db";
-import {
-	handleAuth,
-	handleLogin,
-	Session,
-	GetLoginState,
-	handleCallback,
-} from "@auth0/nextjs-auth0";
+import { handleAuth, Session, handleCallback } from "@auth0/nextjs-auth0";
 import { NextApiRequest, NextApiResponse } from "next";
-import { NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
 // TODO replace 'any' types. Add error handling. Think about response numbers?? Add name or email to User schema.
 
 // export const GET = handleAuth();
 
 export const GET = handleAuth({
-	callback: async (req: any, res: any) => {
+	callback: async (req: NextApiRequest, res: NextApiResponse) => {
 		try {
 			return await handleCallback(req, res, {
 				afterCallback,
@@ -25,7 +19,11 @@ export const GET = handleAuth({
 	},
 });
 
-const afterCallback = async (req: any, session: any, state: any) => {
+const afterCallback = async (
+	req: NextRequest,
+	session: Session,
+	state: any,
+) => {
 	console.log("I am getting called after callback", session);
 	if (session.user) {
 		// permanentRedirect('/verify-email')
