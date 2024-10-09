@@ -14,10 +14,12 @@ TBD
 - [x] Setup Prisma seeding & migration
 - [x] Add authentication (Auth0)
 - [x] Connect users to database
-- [ ] Refine schema
+- [x] Refine schema
 - [ ] Add user POST
 - [ ] Add user DELETE
+- [ ] Add user custom puzzles to schema
 - [ ] Refine UI
+- [ ] Add error handling
 - [ ] Add additional functionality (TBD)
 - [ ] Delete button, dndkit, routing, analytics, shadcn, server actions
 - [ ] Fix gap between footer and main

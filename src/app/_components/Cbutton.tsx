@@ -5,7 +5,7 @@ import { addPuzzleToUser } from "@/actions/actions";
 export function CButton() {
 	return (
 		<button
-			className=""
+			className="rounded-sm bg-blue-500 p-4 py-2 text-white"
 			onClick={() =>
 				addPuzzleToUser(
 					"google-oauth2|115262421356759644142",
@@ -13,7 +13,7 @@ export function CButton() {
 				)
 			}
 		>
-			Click me{" "}
+			Add Puzzle
 		</button>
 	);
 }
