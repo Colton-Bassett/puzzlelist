@@ -11,10 +11,10 @@ TBD
 - [x] Setup basic Prisma SQLite database
 - [x] Update to Prisma Postgresql database
 - [x] Deploy on Vercel
-- [ ] Setup Prisma seeding & migration
+- [x] Setup Prisma seeding & migration
 - [x] Add authentication (Auth0)
+- [x] Connect users to database
 - [ ] Refine schema
-- [ ] Connect users to database
 - [ ] Add user POST
 - [ ] Add user DELETE
 - [ ] Refine UI
@@ -30,6 +30,9 @@ pnpm dev
 
 pnpm prisma db push
 # push changes to schema from prisma to database
+
+pnpm prisma db seed
+# create default puzzle data
 
 pnpm prisma generate
 # regenerates prisma client (use after schema changes)

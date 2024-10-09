@@ -36,11 +36,17 @@ const afterCallback = async (req: NextRequest, session: Session) => {
 		if (!existingUser) {
 			console.log("creating new user");
 			// Create new user
-			await prisma.user.create({
+			const newUser = await prisma.user.create({
 				data: {
+					name: user.name,
 					auth0Sub: user.sub,
+					userPuzzles: {
+						create: [],
+					},
 				},
 			});
+
+			console.log("new user created", newUser);
 		} else {
 			console.log("user exists in db");
 		}
