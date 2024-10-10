@@ -44,7 +44,7 @@ const RecommendedPuzzles: React.FC<PuzzleProps> = ({ puzzles }) => {
 										{puzzle.description}
 									</div>
 									<div className="mt-auto flex min-w-full justify-end">
-										<AddPuzzleButton />
+										<AddPuzzleButton puzzleId={puzzle.id} />
 									</div>
 								</div>
 							</div>

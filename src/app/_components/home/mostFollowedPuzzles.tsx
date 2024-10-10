@@ -28,7 +28,7 @@ const MostFollowedPuzzles: React.FC<PuzzleProps> = ({ puzzles }) => {
 							</div>
 
 							<div className="flex w-12 items-center justify-center">
-								<AddPuzzleButton />
+								<AddPuzzleButton puzzleId={puzzle.id} />
 							</div>
 						</li>
 					))}

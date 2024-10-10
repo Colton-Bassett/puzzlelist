@@ -33,7 +33,7 @@ const UserPuzzles: React.FC<PuzzleProps> = ({ puzzles }) => {
 							{puzzle.url}
 						</a>
 						<div className="ml-6 flex items-center justify-center">
-							<AddPuzzleButton />
+							<AddPuzzleButton puzzleId={puzzle.id} />
 						</div>
 					</li>
 				))}

@@ -2,14 +2,18 @@
 
 import { addPuzzleToUser } from "@/actions/actions";
 
-export default function AddPuzzleButton() {
+interface AddPuzzleButtonProps {
+	puzzleId: string;
+}
+
+const AddPuzzleButton: React.FC<AddPuzzleButtonProps> = ({ puzzleId }) => {
 	return (
 		<button
 			className=""
 			onClick={() =>
 				addPuzzleToUser(
 					// "google-oauth2|115262421356759644142",
-					"cm22gqtbu00005q0t0zjwfute",
+					puzzleId,
 				)
 			}
 		>
@@ -29,4 +33,6 @@ export default function AddPuzzleButton() {
 			</svg>
 		</button>
 	);
-}
+};
+
+export default AddPuzzleButton;
