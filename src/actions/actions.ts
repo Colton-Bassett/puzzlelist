@@ -1,5 +1,6 @@
 "use server";
 
+import UserPuzzles from "@/app/_components/home/userPuzzles";
 import prisma from "@/lib/db";
 import { getSession } from "@auth0/nextjs-auth0";
 import { Prisma } from "@prisma/client";
@@ -35,6 +36,24 @@ export async function addPuzzleToUser(puzzleId: string) {
 			},
 		});
 	}
+}
+
+export async function getUserPuzzles() {
+	const session = await getSession();
+	const user = session?.user;
+
+	if (user?.sub) {
+		const auth0Sub = user.sub;
+
+		const userFromDB = await prisma.user.findUnique({
+			where: { auth0Sub },
+			include: { userPuzzles: true },
+		});
+
+		return userFromDB?.userPuzzles || [];
+	}
+
+	return [];
 }
 
 // PUZZLE

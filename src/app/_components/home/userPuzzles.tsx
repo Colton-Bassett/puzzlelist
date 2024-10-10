@@ -1,3 +1,4 @@
+import { getUserPuzzles } from "@/actions/actions";
 import { Puzzle } from "../../types";
 import AddPuzzleButton from "./addPuzzleButton";
 
@@ -5,7 +6,8 @@ interface PuzzleProps {
 	puzzles: Puzzle[];
 }
 
-const UserPuzzles: React.FC<PuzzleProps> = ({ puzzles }) => {
+const UserPuzzles: React.FC<PuzzleProps> = async ({ puzzles }) => {
+	const userPuzzles = await getUserPuzzles();
 	return (
 		<div
 			className="flex w-8/12 flex-col overflow-hidden"
@@ -15,7 +17,7 @@ const UserPuzzles: React.FC<PuzzleProps> = ({ puzzles }) => {
 				Your daily puzzles
 			</div>
 			<ul className="list-disc">
-				{[...puzzles].map((puzzle) => (
+				{[...userPuzzles].map((puzzle) => (
 					<li
 						key={puzzle.id}
 						className="flex h-14 items-center border-t border-gray-200"
