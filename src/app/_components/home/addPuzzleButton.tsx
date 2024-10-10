@@ -8,6 +8,10 @@ interface AddPuzzleButtonProps {
 }
 
 interface UserPuzzle {
+	id: string;
+	userId: string;
+	puzzleId: string;
+	completed: boolean;
 	puzzle: {
 		id: string;
 		name: string;
@@ -17,33 +21,23 @@ interface UserPuzzle {
 		updatedAt: Date;
 		createdAt: Date;
 	};
-	id: string; // ID from UserPuzzle model
-	userId: string; // User ID from UserPuzzle model
-	puzzleId: string; // Puzzle ID from UserPuzzle model
-	completed: boolean; // Completion status
 }
 
 const AddPuzzleButton: React.FC<AddPuzzleButtonProps> = ({
 	puzzleId,
 	userPuzzles,
 }) => {
-	// const isPuzzleInUserList = userPuzzles?.some(
-	// 	(userPuzzle) => userPuzzle.puzzleId === puzzleId,
-	// );
+	const isPuzzleJoinIdInUserList = userPuzzles?.some(
+		(userPuzzle) => userPuzzle.id === puzzleId,
+	);
 
-	const isPuzzleInUserList = false;
+	const isPuzzleInUserList = userPuzzles?.some(
+		(userPuzzle) => userPuzzle.puzzleId === puzzleId,
+	);
 	return (
 		<div>
-			{isPuzzleInUserList ? (
-				<button
-					className=""
-					onClick={() =>
-						addPuzzleToUser(
-							// "google-oauth2|115262421356759644142",
-							puzzleId,
-						)
-					}
-				>
+			{isPuzzleInUserList || isPuzzleJoinIdInUserList ? (
+				<button className="" onClick={() => alert("unfollow puzzle")}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						viewBox="0 0 24 24"

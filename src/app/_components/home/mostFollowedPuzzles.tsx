@@ -1,3 +1,4 @@
+import { getUserPuzzles } from "@/actions/actions";
 import { Puzzle } from "../../types";
 import AddPuzzleButton from "./addPuzzleButton";
 
@@ -5,7 +6,9 @@ interface PuzzleProps {
 	puzzles: Puzzle[];
 }
 
-const MostFollowedPuzzles: React.FC<PuzzleProps> = ({ puzzles }) => {
+const MostFollowedPuzzles: React.FC<PuzzleProps> = async ({ puzzles }) => {
+	const userPuzzles = await getUserPuzzles();
+
 	return (
 		<div className="mb-4 ml-6 rounded-xl border border-gray-200 p-4">
 			<div className="flex flex-col">
@@ -28,7 +31,10 @@ const MostFollowedPuzzles: React.FC<PuzzleProps> = ({ puzzles }) => {
 							</div>
 
 							<div className="flex w-12 items-center justify-center">
-								<AddPuzzleButton puzzleId={puzzle.id} />
+								<AddPuzzleButton
+									puzzleId={puzzle.id}
+									userPuzzles={userPuzzles}
+								/>
 							</div>
 						</li>
 					))}

@@ -1,3 +1,4 @@
+import { getUserPuzzles } from "@/actions/actions";
 import { Puzzle } from "../../types";
 import AddPuzzleButton from "./addPuzzleButton";
 
@@ -5,7 +6,9 @@ interface PuzzleProps {
 	puzzles: Puzzle[];
 }
 
-const RecommendedPuzzles: React.FC<PuzzleProps> = ({ puzzles }) => {
+const RecommendedPuzzles: React.FC<PuzzleProps> = async ({ puzzles }) => {
+	const userPuzzles = await getUserPuzzles();
+
 	return (
 		<div className="bg-gray-50">
 			<div className="m-auto max-w-5xl py-6">
@@ -44,7 +47,10 @@ const RecommendedPuzzles: React.FC<PuzzleProps> = ({ puzzles }) => {
 										{puzzle.description}
 									</div>
 									<div className="mt-auto flex min-w-full justify-end">
-										<AddPuzzleButton puzzleId={puzzle.id} />
+										<AddPuzzleButton
+											puzzleId={puzzle.id}
+											userPuzzles={userPuzzles}
+										/>
 									</div>
 								</div>
 							</div>

@@ -36,7 +36,7 @@ const UserPuzzles: React.FC<PuzzleProps> = async ({ puzzles }) => {
 							{puzzle.url}
 						</a>
 						<div className="ml-6 flex items-center justify-center">
-							<AddPuzzleButton puzzleId={id} />
+							<AddPuzzleButton puzzleId={id} userPuzzles={userPuzzles} />
 						</div>
 						<div className="ml-6 flex items-center justify-center">
 							<CompletePuzzleCheckbox puzzleId={id} />
