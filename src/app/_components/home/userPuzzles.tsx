@@ -9,6 +9,7 @@ interface PuzzleProps {
 
 const UserPuzzles: React.FC<PuzzleProps> = async ({ puzzles }) => {
 	const userPuzzles = await getUserPuzzles();
+	// console.log(userPuzzles);
 
 	return (
 		<div
