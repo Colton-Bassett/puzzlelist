@@ -1,6 +1,18 @@
+"use client";
+
+import { addPuzzleToUser } from "@/actions/actions";
+
 export default function AddPuzzleButton() {
 	return (
-		<button className="">
+		<button
+			className=""
+			onClick={() =>
+				addPuzzleToUser(
+					// "google-oauth2|115262421356759644142",
+					"cm22gqtbu00005q0t0zjwfute",
+				)
+			}
+		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				fill="none"

@@ -6,7 +6,6 @@ import UserEngagementPrompt from "./_components/home/userEngagementPrompt";
 import CreatePuzzleList from "./_components/home/createPuzzleList";
 import AuthWrapper from "./_components/authWrapper";
 // import { createPuzzle } from "@/actions/actions";
-import { CButton } from "./_components/Cbutton";
 
 export default async function Home() {
 	const puzzles = await prisma.puzzle.findMany();
@@ -47,7 +46,6 @@ export default async function Home() {
 								Create puzzle
 							</button>
 						</form> */}
-						<CButton />
 					</div>
 					<div className="m-auto flex h-full w-full max-w-5xl flex-col pb-6">
 						<UserEngagementPrompt />

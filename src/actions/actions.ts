@@ -1,6 +1,7 @@
 "use server";
 
 import prisma from "@/lib/db";
+import { getSession } from "@auth0/nextjs-auth0";
 import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
@@ -17,16 +18,23 @@ export async function createUser() {
 	// remove existing puzzles
 }
 
-export async function addPuzzleToUser(auth0Sub: string, puzzleId: string) {
-	console.log("addPuzzleToUser...");
-	await prisma.user.update({
-		where: { auth0Sub },
-		data: {
-			userPuzzles: {
-				connect: { id: puzzleId },
+export async function addPuzzleToUser(puzzleId: string) {
+	// todo add error handling
+	const session = await getSession();
+	const user = session?.user;
+
+	if (user?.sub) {
+		const auth0Sub = user.sub;
+		console.log("addPuzzleToUser...");
+		await prisma.user.update({
+			where: { auth0Sub },
+			data: {
+				userPuzzles: {
+					connect: { id: puzzleId },
+				},
 			},
-		},
-	});
+		});
+	}
 }
 
 // PUZZLE
