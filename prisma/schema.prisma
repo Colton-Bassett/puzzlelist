@@ -12,7 +12,7 @@ model User {
     id String @id @default(cuid())
     name String
     auth0Sub String @unique
-    userPuzzles Puzzle[]
+    userPuzzles UserPuzzle[]
 
     @@map("puzzlelist_users")
 }
@@ -27,7 +27,19 @@ model Puzzle {
   createdAt   DateTime @default(now())
 
   @@map("puzzlelist_puzzles")
-  User User[]
+  userPuzzles UserPuzzle[]
+}
+
+model UserPuzzle {
+     id          String   @id @default(cuid())
+    userId String
+    puzzleId String
+    completed Boolean @default(false)
+
+    user User @relation(fields: [userId], references: [id])
+    puzzle Puzzle @relation(fields: [puzzleId], references: [id])
+
+    @@unique([userId, puzzleId]) // Ensure unique user-puzzle combinations
 }
 
 // DO NOT MODIFY. IGNORE THIS.

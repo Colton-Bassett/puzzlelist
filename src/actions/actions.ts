@@ -20,21 +20,26 @@ export async function createUser() {
 }
 
 export async function addPuzzleToUser(puzzleId: string) {
-	// todo add error handling
+	// todo add error handling on if adding existing user, puzzle relationship
 	const session = await getSession();
 	const user = session?.user;
 
 	if (user?.sub) {
 		const auth0Sub = user.sub;
 		console.log("addPuzzleToUser...");
-		await prisma.user.update({
+
+		const userFromDB = await prisma.user.findUnique({
 			where: { auth0Sub },
-			data: {
-				userPuzzles: {
-					connect: { id: puzzleId },
-				},
-			},
 		});
+
+		if (userFromDB) {
+			await prisma.userPuzzle.create({
+				data: {
+					userId: userFromDB.id,
+					puzzleId: puzzleId,
+				},
+			});
+		}
 	}
 }
 
@@ -47,10 +52,11 @@ export async function getUserPuzzles() {
 
 		const userFromDB = await prisma.user.findUnique({
 			where: { auth0Sub },
-			include: { userPuzzles: true },
+			include: { userPuzzles: { include: { puzzle: true } } },
 		});
 
-		return userFromDB?.userPuzzles || [];
+		const data = userFromDB?.userPuzzles || [];
+		return data;
 	}
 
 	return [];

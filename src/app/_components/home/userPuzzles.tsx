@@ -1,6 +1,7 @@
 import { getUserPuzzles } from "@/actions/actions";
 import { Puzzle } from "../../types";
 import AddPuzzleButton from "./addPuzzleButton";
+import CompletePuzzleCheckbox from "./completePuzzleCheckbox";
 
 interface PuzzleProps {
 	puzzles: Puzzle[];
@@ -8,18 +9,17 @@ interface PuzzleProps {
 
 const UserPuzzles: React.FC<PuzzleProps> = async ({ puzzles }) => {
 	const userPuzzles = await getUserPuzzles();
+
 	return (
 		<div
 			className="flex w-8/12 flex-col overflow-hidden"
 			style={{ maxHeight: "610px" }}
 		>
-			<div className="mb-2" style={{ fontSize: "18px" }}>
-				Your daily puzzles
-			</div>
+			<div className="mb-2 text-lg">Your daily puzzles</div>
 			<ul className="list-disc">
-				{[...userPuzzles].map((puzzle) => (
+				{userPuzzles.map(({ id, completed, puzzle }) => (
 					<li
-						key={puzzle.id}
+						key={id}
 						className="flex h-14 items-center border-t border-gray-200"
 					>
 						<div className="flex flex-1 overflow-hidden">
@@ -35,7 +35,10 @@ const UserPuzzles: React.FC<PuzzleProps> = async ({ puzzles }) => {
 							{puzzle.url}
 						</a>
 						<div className="ml-6 flex items-center justify-center">
-							<AddPuzzleButton puzzleId={puzzle.id} />
+							<AddPuzzleButton puzzleId={id} />
+						</div>
+						<div className="ml-6 flex items-center justify-center">
+							<CompletePuzzleCheckbox puzzleId={id} />
 						</div>
 					</li>
 				))}
