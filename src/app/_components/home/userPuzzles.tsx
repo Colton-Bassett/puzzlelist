@@ -7,15 +7,11 @@ interface PuzzleProps {
 	puzzles: Puzzle[];
 }
 
-const UserPuzzles: React.FC<PuzzleProps> = async ({ puzzles }) => {
+const UserPuzzles: React.FC<PuzzleProps> = async ({}) => {
 	const userPuzzles = await getUserPuzzles();
-	// console.log(userPuzzles);
 
 	return (
-		<div
-			className="flex w-8/12 flex-col overflow-hidden"
-			style={{ maxHeight: "610px" }}
-		>
+		<div className="flex max-h-[610px] w-8/12 flex-col overflow-hidden">
 			<div className="mb-2 text-lg">Your daily puzzles</div>
 			<ul className="list-disc">
 				{userPuzzles.map(({ id, completed, puzzle }) => (
@@ -30,8 +26,7 @@ const UserPuzzles: React.FC<PuzzleProps> = async ({ puzzles }) => {
 
 						<a
 							href={puzzle.url}
-							className="flex justify-end text-blue-500 hover:underline"
-							style={{ width: "348px" }}
+							className="flex w-[348px] justify-end text-blue-500 hover:underline"
 						>
 							{puzzle.url}
 						</a>
@@ -40,6 +35,8 @@ const UserPuzzles: React.FC<PuzzleProps> = async ({ puzzles }) => {
 						</div>
 						<div className="ml-6 flex items-center justify-center">
 							<CompletePuzzleCheckbox puzzleId={id} />
+							{/* placeholder, delete later v */}
+							{completed}
 						</div>
 					</li>
 				))}

@@ -1,6 +1,5 @@
 "use server";
 
-import UserPuzzles from "@/app/_components/home/userPuzzles";
 import prisma from "@/lib/db";
 import { getSession } from "@auth0/nextjs-auth0";
 import { Prisma } from "@prisma/client";

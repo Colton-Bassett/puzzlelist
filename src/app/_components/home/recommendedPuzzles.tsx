@@ -37,8 +37,7 @@ const RecommendedPuzzles: React.FC<PuzzleProps> = async ({ puzzles }) => {
 						{[...puzzles].map((puzzle) => (
 							<div
 								key={puzzle.id + "r"}
-								className="h- mb-3 mr-4 mt-1 w-40 rounded-xl border border-gray-200 bg-white"
-								style={{ height: "242px" }}
+								className="mb-3 mr-4 mt-1 h-[242px] w-40 rounded-xl border border-gray-200 bg-white"
 							>
 								<div className="flex h-full flex-col px-3 py-2">
 									<div className="mr-3">img</div>
