@@ -11,7 +11,7 @@ const RecommendedPuzzles: React.FC<PuzzleProps> = async ({ puzzles }) => {
 
 	return (
 		<div className="bg-gray-50">
-			<div className="m-auto max-w-5xl py-6">
+			<div className="m-auto max-w-5xl px-12 py-6">
 				<section>
 					<div className="text-lg">Discover more</div>
 					<div className="mb-3 mt-2 flex items-center">

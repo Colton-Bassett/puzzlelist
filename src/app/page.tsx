@@ -47,7 +47,7 @@ export default async function Home() {
 							</button>
 						</form> */}
 					</div>
-					<div className="m-auto flex h-full w-full max-w-5xl flex-col pb-6">
+					<div className="m-auto flex h-full w-full max-w-5xl flex-col px-12 pb-6">
 						<UserEngagementPrompt />
 
 						<div className="m-auto mt-6 flex w-full max-w-5xl">
