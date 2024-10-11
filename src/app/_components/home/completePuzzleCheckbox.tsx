@@ -7,7 +7,11 @@ interface AddPuzzleButtonProps {
 const CompletePuzzleCheckbox: React.FC<AddPuzzleButtonProps> = ({
 	puzzleId,
 }) => {
-	return <input type="checkbox" id={`${puzzleId}`} name="completePuzzle" />;
+	return (
+		<div className="flex w-10 items-center justify-center">
+			<input type="checkbox" id={`${puzzleId}`} name="completePuzzle" />
+		</div>
+	);
 };
 
 export default CompletePuzzleCheckbox;

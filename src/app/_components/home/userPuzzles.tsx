@@ -19,25 +19,25 @@ const UserPuzzles: React.FC<PuzzleProps> = async ({}) => {
 						key={id}
 						className="flex h-14 items-center border-t border-gray-200"
 					>
-						<div className="flex flex-1 overflow-hidden">
-							<div className="mr-3">img</div>
-							<div className="flex flex-1">{puzzle.name}</div>
+						<div className="flex max-w-36 flex-1">
+							<div className="mr-3 w-7">img</div>
+							<div className="mr-3 max-w-24 overflow-hidden text-ellipsis whitespace-nowrap">
+								{puzzle.name}
+							</div>
 						</div>
+						<div className="flex flex-1 justify-start">
+							<a
+								href={puzzle.url}
+								className="min-w-28 max-w-[224px] overflow-hidden text-ellipsis whitespace-nowrap text-right text-blue-500 hover:underline"
+							>
+								{puzzle.url}
+							</a>
+						</div>
+						<AddPuzzleButton puzzleId={id} userPuzzles={userPuzzles} />
 
-						<a
-							href={puzzle.url}
-							className="flex w-[348px] justify-end text-blue-500 hover:underline"
-						>
-							{puzzle.url}
-						</a>
-						<div className="ml-6 flex items-center justify-center">
-							<AddPuzzleButton puzzleId={id} userPuzzles={userPuzzles} />
-						</div>
-						<div className="ml-6 flex items-center justify-center">
-							<CompletePuzzleCheckbox puzzleId={id} />
-							{/* placeholder, delete later v */}
-							{completed}
-						</div>
+						<CompletePuzzleCheckbox puzzleId={id} />
+
+						{completed}
 					</li>
 				))}
 			</ul>

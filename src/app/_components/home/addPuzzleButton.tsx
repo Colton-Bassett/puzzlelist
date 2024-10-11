@@ -35,7 +35,7 @@ const AddPuzzleButton: React.FC<AddPuzzleButtonProps> = ({
 		(userPuzzle) => userPuzzle.puzzleId === puzzleId,
 	);
 	return (
-		<div>
+		<div className="flex w-10 items-center justify-center">
 			{isPuzzleInUserList || isPuzzleJoinIdInUserList ? (
 				<button className="" onClick={() => alert("unfollow puzzle")}>
 					<svg
