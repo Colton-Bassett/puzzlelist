@@ -33,7 +33,7 @@ const RecommendedPuzzles: React.FC<PuzzleProps> = async ({ puzzles }) => {
 							</svg>
 						</div>
 					</div>
-					<div className="flex">
+					<div className="flex overflow-auto whitespace-nowrap">
 						{[...puzzles].map((puzzle) => (
 							<div
 								key={puzzle.id + "r"}

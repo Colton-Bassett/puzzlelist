@@ -10,7 +10,7 @@ const MostFollowedPuzzles: React.FC<PuzzleProps> = async ({ puzzles }) => {
 	const userPuzzles = await getUserPuzzles();
 
 	return (
-		<div className="mb-4 rounded-xl border border-gray-200 p-4 md:ml-6">
+		<div className="mb-4 mt-6 rounded-xl border border-gray-200 p-4 md:ml-6 md:mt-0">
 			<div className="flex flex-col">
 				<div className="text-lg">
 					<span className="mb-3 block">Most followed on Puzzle List</span>

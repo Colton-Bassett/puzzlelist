@@ -52,7 +52,7 @@ export default async function Home() {
 
 						<div className="m-auto mt-6 flex w-full max-w-5xl flex-col md:flex-row">
 							<UserPuzzles puzzles={puzzles} />
-							<div className="w-full md:w-4/12">
+							<div className="mt-6 w-full md:mt-0 md:w-4/12">
 								<CreatePuzzleList />
 								<MostFollowedPuzzles puzzles={puzzles} />
 							</div>
