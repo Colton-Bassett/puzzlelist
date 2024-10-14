@@ -1,6 +1,6 @@
 const CreatePuzzleList: React.FC = () => {
 	return (
-		<div className="mb-4 ml-6 rounded-xl border border-gray-200 p-4">
+		<div className="mb-4 rounded-xl border border-gray-200 p-4 md:ml-6">
 			<div className="flex">
 				<div className="mr-3 flex items-center justify-center">
 					<div className="rounded-md bg-blue-100 p-2">
