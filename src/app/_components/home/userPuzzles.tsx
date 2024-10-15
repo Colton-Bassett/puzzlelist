@@ -11,7 +11,7 @@ const UserPuzzles: React.FC<PuzzleProps> = async ({}) => {
 	const userPuzzles = await getUserPuzzles();
 
 	return (
-		<div className="flex max-h-[610px] w-full flex-col overflow-hidden md:w-8/12">
+		<div className="flex max-h-[610px] w-full flex-col md:w-8/12">
 			<div className="mb-2 text-lg">Your daily puzzles</div>
 			<ul className="list-disc">
 				{userPuzzles.map(({ id, completed, puzzle }) => (

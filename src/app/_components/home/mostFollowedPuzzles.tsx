@@ -21,9 +21,11 @@ const MostFollowedPuzzles: React.FC<PuzzleProps> = async ({ puzzles }) => {
 							key={puzzle.id + "m"}
 							className="flex h-24 items-center border-t border-gray-200"
 						>
-							<div className="flex max-w-[130px] flex-col">
-								<div className="mr-3">img</div>
-								<div className="flex flex-1">{puzzle.name}</div>
+							<div className="flex w-3/4 flex-col">
+								<div>img</div>
+								<div className="overflow-hidden text-ellipsis whitespace-nowrap">
+									{puzzle.name}
+								</div>
 								<a
 									href={puzzle.url}
 									className="overflow-hidden text-ellipsis whitespace-nowrap text-blue-500 hover:underline"
@@ -32,7 +34,7 @@ const MostFollowedPuzzles: React.FC<PuzzleProps> = async ({ puzzles }) => {
 								</a>
 							</div>
 
-							<div className="flex w-10 flex-1 items-center justify-end">
+							<div className="flex h-full w-10 flex-1 items-center justify-end">
 								<AddPuzzleButton
 									puzzleId={puzzle.id}
 									userPuzzles={userPuzzles}
