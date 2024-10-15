@@ -1,6 +1,6 @@
 const UserEngagementPrompt: React.FC = () => {
 	return (
-		<div className="mt-3 flex h-16 w-full items-center rounded-xl border border-gray-200 p-3 pl-5">
+		<div className="h-18 mt-3 flex w-full items-center rounded-xl border border-gray-200 p-3 pl-5 sm:h-16">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				fill="none"
