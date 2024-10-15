@@ -1,8 +1,8 @@
 export default function Footer() {
 	return (
-		<div className="bg-gray-50">
-			<footer className="m-auto mt-4 flex w-full max-w-5xl border-t border-gray-200 px-12 pb-3 pt-9">
-				<div className="flex items-center pb-5">
+		<div className="flex overflow-auto whitespace-nowrap border-t border-gray-200 bg-gray-50">
+			<footer className="m-auto mt-4 flex w-full max-w-5xl px-12 pb-5 pt-5 md:pb-9 md:pt-9">
+				<div className="flex w-full items-center">
 					<a href="/" className="text-xl">
 						<span className="text-gray-600">Puzzle</span>
 						<span className="pl-1 text-gray-600">List</span>
