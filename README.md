@@ -20,13 +20,15 @@ TBD
 - [x] Add complete/uncheck puzzle input
 - [x] Add mobile UI
 - [x] Refine UI
-- [ ] Add user custom puzzles to schema
-- [ ] Add custom puzzle POST
-- [ ] Add puzzle DELETE
+- [x] Update schema for user created puzzles
+- [x] Add custom puzzle POST
+- [ ] Add puzzle DELETE when unfollowing user created puzzles
+- [ ] Filter mostFollowed and recommendedPuzzles to NOT show user created puzzles
 - [ ] Add error handling
 
 - [ ] Add throttling for Follow/unfollow, complete/uncheck
 - [ ] Add Mock 'Help' 'Send Feedback' 'Disclaimer' pages/routes
+- [ ] Possibly refactor inneficient server action calls
 - [ ] Delete button, dndkit, routing, analytics, shadcn, server actions
 
 ## Scripts

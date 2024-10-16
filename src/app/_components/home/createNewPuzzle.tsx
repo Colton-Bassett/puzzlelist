@@ -1,4 +1,4 @@
-import { createPuzzle } from "@/actions/actions";
+import { handleNewPuzzleSubmit } from "@/actions/actions";
 import {
 	Dialog,
 	DialogContent,
@@ -55,7 +55,7 @@ export function CreatePuzzleDialog() {
 					</DialogDescription>
 				</DialogHeader>
 				<form
-					action={createPuzzle}
+					action={handleNewPuzzleSubmit}
 					className="flex h-full w-full flex-col gap-y-2"
 				>
 					<input

@@ -62,25 +62,56 @@ export async function getUserPuzzles() {
 }
 
 // PUZZLE
-export async function createPuzzle(formData: FormData) {
-	try {
-		await prisma.puzzle.create({
-			data: {
-				// add soft validation
-				iconUrl: "https://example.com",
-				name: formData.get("name") as string,
-				url: formData.get("url") as string,
-			},
-		});
-	} catch (error) {
-		if (error instanceof Prisma.PrismaClientKnownRequestError) {
-			console.log("Prisma error:", error.code);
-		}
-		throw error;
-	}
+// getuser from session
+// add creatorId to puzzle
+// addpuzzletouser?
+// change getAllPuzzles to get all EXCEPT where creatorId is not null
 
-	// refresh ui to display new puzzles
-	revalidatePath("/");
+export async function createPuzzle(formData: FormData) {
+	// Get session to identify the current user
+	const session = await getSession();
+	const user = session?.user;
+	if (user?.sub) {
+		const auth0Sub = user.sub;
+
+		// Find the user in the database
+		const userFromDB = await prisma.user.findUnique({
+			where: { auth0Sub },
+		});
+		try {
+			const newPuzzle = await prisma.puzzle.create({
+				data: {
+					// add soft validation
+					iconUrl: "https://example.com",
+					name: formData.get("name") as string,
+					url: formData.get("url") as string,
+					creatorId: userFromDB?.id,
+				},
+			});
+			// refresh ui to display new puzzles
+			revalidatePath("/");
+			return newPuzzle;
+		} catch (error) {
+			if (error instanceof Prisma.PrismaClientKnownRequestError) {
+				console.log("Prisma error:", error.code);
+			}
+			throw error;
+		}
+	} else {
+		console.log("user sub error");
+	}
+}
+
+export async function handleNewPuzzleSubmit(formData: FormData) {
+	try {
+		const newPuzzle = await createPuzzle(formData);
+
+		if (newPuzzle?.id) {
+			await addPuzzleToUser(newPuzzle.id);
+		}
+	} catch (error) {
+		console.error("Error creating puzzle or adding to user:", error);
+	}
 }
 
 // not implemented in UI
@@ -95,6 +126,7 @@ export async function editPuzzle(formData: FormData, id: string) {
 	});
 }
 
+// check if puzzle creatorId !== null, delete from Puzzle table as well
 export async function removePuzzleFromUser(puzzleId: string) {
 	// Get session to identify the current user
 	const session = await getSession();

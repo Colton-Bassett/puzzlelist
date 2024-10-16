@@ -25,13 +25,14 @@ model Puzzle {
   description String?
   updatedAt   DateTime @updatedAt
   createdAt   DateTime @default(now())
+  creatorId   String?
 
-  @@map("puzzlelist_puzzles")
   userPuzzles UserPuzzle[]
+  @@map("puzzlelist_puzzles")
 }
 
 model UserPuzzle {
-     id          String   @id @default(cuid())
+    id          String   @id @default(cuid())
     userId String
     puzzleId String
     completed Boolean @default(false)
