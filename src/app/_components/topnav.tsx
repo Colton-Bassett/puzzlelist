@@ -13,7 +13,7 @@ export default async function TopNav() {
 			{user ? (
 				<a
 					href="/api/auth/logout"
-					className="rounded-sm p-7 py-2 hover:bg-blue-50"
+					className="rounded-sm p-7 py-2 hover:bg-gray-50"
 				>
 					Logout, {user.name}
 				</a>
