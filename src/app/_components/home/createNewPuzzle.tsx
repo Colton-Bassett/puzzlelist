@@ -50,7 +50,7 @@ export function CreatePuzzleDialog() {
 				<DialogHeader>
 					<DialogTitle>Create puzzle</DialogTitle>
 					<DialogDescription>
-						Make a new puzzle. It will be added to your Puzzle List when you're
+						Make a new puzzle. It will be added to your Puzzle List when you are
 						done.
 					</DialogDescription>
 				</DialogHeader>

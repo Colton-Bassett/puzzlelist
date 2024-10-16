@@ -11,7 +11,7 @@ export default async function TopNav() {
 			</div>
 
 			{user ? (
-				<a href="/api/auth/logout">Logout, {user.user_id}</a>
+				<a href="/api/auth/logout">Logout, {user.name}</a>
 			) : (
 				<a href="/api/auth/login">Login</a>
 			)}
