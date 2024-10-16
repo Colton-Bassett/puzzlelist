@@ -15,14 +15,19 @@ TBD
 - [x] Add authentication (Auth0)
 - [x] Connect users to database
 - [x] Refine schema
-- [ ] Add user POST
-- [ ] Add user DELETE
+- [x] Add Shadcn
+- [x] Add follow/unfollow puzzle
+- [x] Add complete/uncheck puzzle input
+- [x] Add mobile UI
+- [x] Refine UI
 - [ ] Add user custom puzzles to schema
-- [ ] Refine UI
+- [ ] Add custom puzzle POST
+- [ ] Add puzzle DELETE
 - [ ] Add error handling
-- [ ] Add additional functionality (TBD)
+
+- [ ] Add throttling for Follow/unfollow, complete/uncheck
+- [ ] Add Mock 'Help' 'Send Feedback' 'Disclaimer' pages/routes
 - [ ] Delete button, dndkit, routing, analytics, shadcn, server actions
-- [ ] Fix gap between footer and main
 
 ## Scripts
 

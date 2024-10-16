@@ -36,7 +36,10 @@ const UserPuzzles: React.FC<PuzzleProps> = async ({}) => {
 						<div className="ml-auto flex">
 							<AddPuzzleButton puzzleId={puzzle.id} userPuzzles={userPuzzles} />
 
-							<CompletePuzzleCheckbox puzzleId={id} />
+							<CompletePuzzleCheckbox
+								puzzleId={puzzle.id}
+								completed={completed}
+							/>
 
 							{completed}
 						</div>

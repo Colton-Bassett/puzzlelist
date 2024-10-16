@@ -122,3 +122,34 @@ export async function removePuzzleFromUser(puzzleId: string) {
 		}
 	}
 }
+
+export async function updatePuzzleCompletionStatus(
+	puzzleId: string,
+	completed: boolean,
+) {
+	// Get session to identify the current user
+	const session = await getSession();
+	const user = session?.user;
+
+	if (user?.sub) {
+		const auth0Sub = user.sub;
+
+		// Find the user in the database
+		const userFromDB = await prisma.user.findUnique({
+			where: { auth0Sub },
+		});
+
+		if (userFromDB) {
+			// Update the UserPuzzle entry's 'completed' status
+			await prisma.userPuzzle.updateMany({
+				where: {
+					userId: userFromDB.id,
+					puzzleId: puzzleId,
+				},
+				data: {
+					completed: completed, // Update the completion status
+				},
+			});
+		}
+	}
+}
