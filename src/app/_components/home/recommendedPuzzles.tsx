@@ -42,7 +42,7 @@ const RecommendedPuzzles: React.FC<PuzzleProps> = async ({ puzzles }) => {
 							<div className="flex h-full flex-col px-3 py-2">
 								<div className="mr-3">img</div>
 								<div className="mb-5 flex">{puzzle.name}</div>
-								<div className="flex max-h-28 overflow-hidden">
+								<div className="flex max-h-28 overflow-hidden text-ellipsis text-wrap">
 									{puzzle.description}
 								</div>
 								<div className="mt-auto flex min-w-full justify-end">

@@ -1,6 +1,6 @@
 "use client";
 
-import { addPuzzleToUser } from "@/actions/actions";
+import { addPuzzleToUser, removePuzzleFromUser } from "@/actions/actions";
 
 interface AddPuzzleButtonProps {
 	puzzleId: string;
@@ -34,10 +34,12 @@ const AddPuzzleButton: React.FC<AddPuzzleButtonProps> = ({
 	const isPuzzleInUserList = userPuzzles?.some(
 		(userPuzzle) => userPuzzle.puzzleId === puzzleId,
 	);
+
 	return (
 		<div className="flex w-10 items-center justify-center">
 			{isPuzzleInUserList || isPuzzleJoinIdInUserList ? (
-				<button className="" onClick={() => alert("unfollow puzzle")}>
+				// puzzle in userList
+				<button className="" onClick={() => removePuzzleFromUser(puzzleId)}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						viewBox="0 0 24 24"
@@ -52,6 +54,7 @@ const AddPuzzleButton: React.FC<AddPuzzleButtonProps> = ({
 					</svg>
 				</button>
 			) : (
+				// puzzle not in userList
 				<button className="" onClick={() => addPuzzleToUser(puzzleId)}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"

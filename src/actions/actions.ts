@@ -95,7 +95,30 @@ export async function editPuzzle(formData: FormData, id: string) {
 	});
 }
 
-// not implemented in UI
-export async function deletePuzzle(id: string) {
-	await prisma.puzzle.delete({ where: { id } });
+export async function removePuzzleFromUser(puzzleId: string) {
+	// Get session to identify the current user
+	const session = await getSession();
+	const user = session?.user;
+
+	if (user?.sub) {
+		const auth0Sub = user.sub;
+		console.log("removePuzzleFromUser...");
+
+		// Find the user in the database
+		const userFromDB = await prisma.user.findUnique({
+			where: { auth0Sub },
+		});
+
+		console.log(userFromDB?.id, puzzleId);
+
+		if (userFromDB) {
+			// Delete the UserPuzzle entry that links the user and the puzzle
+			await prisma.userPuzzle.deleteMany({
+				where: {
+					userId: userFromDB.id,
+					puzzleId: puzzleId,
+				},
+			});
+		}
+	}
 }

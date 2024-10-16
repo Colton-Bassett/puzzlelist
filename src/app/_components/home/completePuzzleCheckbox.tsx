@@ -4,6 +4,9 @@ interface AddPuzzleButtonProps {
 	puzzleId: string;
 }
 
+// TODO REFACTOR SO THAT PUZZLEID ACTUALLY MEANS USERPUZZLE.ID ??
+// OR ACTUALLY BUILD OUT THIS THING
+
 const CompletePuzzleCheckbox: React.FC<AddPuzzleButtonProps> = ({
 	puzzleId,
 }) => {
