@@ -57,7 +57,7 @@ const AddPuzzleButton: React.FC<AddPuzzleButtonProps> = ({
 										xmlns="http://www.w3.org/2000/svg"
 										viewBox="0 0 24 24"
 										fill="currentColor"
-										className="size-6 fill-gray-500"
+										className="size-6 fill-gray-500 hover:fill-blue-500"
 									>
 										<path
 											fillRule="evenodd"
@@ -82,7 +82,7 @@ const AddPuzzleButton: React.FC<AddPuzzleButtonProps> = ({
 										viewBox="0 0 24 24"
 										strokeWidth={2}
 										stroke="currentColor"
-										className="size-6 stroke-gray-500"
+										className="size-6 stroke-gray-500 hover:stroke-blue-500"
 									>
 										<path
 											strokeLinecap="round"

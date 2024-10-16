@@ -17,7 +17,7 @@ const UserPuzzles: React.FC<PuzzleProps> = async ({}) => {
 				{userPuzzles.map(({ id, completed, puzzle }) => (
 					<li
 						key={id}
-						className="flex h-14 items-center border-t border-gray-200"
+						className="flex h-14 items-center border-t border-gray-200 hover:bg-gray-50"
 					>
 						<div className="flex min-w-36">
 							<div className="mr-3 w-7">img</div>
@@ -28,7 +28,7 @@ const UserPuzzles: React.FC<PuzzleProps> = async ({}) => {
 						<div className="flex min-w-20 flex-1 justify-start overflow-hidden text-ellipsis whitespace-nowrap">
 							<a
 								href={puzzle.url}
-								className="w-full text-left text-blue-500 hover:underline"
+								className="flex h-14 w-full items-center text-left text-blue-500 hover:underline"
 							>
 								{puzzle.url}
 							</a>

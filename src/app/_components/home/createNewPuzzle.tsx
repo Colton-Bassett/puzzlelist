@@ -31,11 +31,12 @@ const CreateNewPuzzle: React.FC = () => {
 						</svg>
 					</div>
 				</div>
-				<div>Add a new puzzle and view your daily puzzles in one place</div>
+				<div className="text-sm">
+					Add a new puzzle and view your daily puzzles in one place
+				</div>
 			</div>
-			<div className="mt-3 flex justify-center rounded-2xl border border-gray-200 p-1">
-				<CreatePuzzleDialog />
-			</div>
+
+			<CreatePuzzleDialog />
 		</div>
 	);
 };
@@ -44,7 +45,9 @@ export function CreatePuzzleDialog() {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<button className="w-full">+ New puzzle</button>
+				<button className="mt-3 flex w-full justify-center rounded-2xl border border-gray-200 p-1 text-sm text-blue-500 hover:bg-sky-50 hover:text-blue-800">
+					+ New puzzle
+				</button>
 			</DialogTrigger>
 			<DialogContent className="sm:max-w-[425px]">
 				<DialogHeader>

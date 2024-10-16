@@ -11,9 +11,19 @@ export default async function TopNav() {
 			</div>
 
 			{user ? (
-				<a href="/api/auth/logout">Logout, {user.name}</a>
+				<a
+					href="/api/auth/logout"
+					className="rounded-sm p-7 py-2 hover:bg-blue-50"
+				>
+					Logout, {user.name}
+				</a>
 			) : (
-				<a href="/api/auth/login">Login</a>
+				<a
+					href="/api/auth/login"
+					className="rounded-sm bg-blue-500 px-7 py-2 text-sm font-light text-white hover:bg-blue-600"
+				>
+					Sign in
+				</a>
 			)}
 		</nav>
 	);

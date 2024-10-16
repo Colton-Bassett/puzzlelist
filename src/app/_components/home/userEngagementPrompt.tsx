@@ -19,7 +19,9 @@ const UserEngagementPrompt: React.FC = () => {
 				<div className="text-sm">Build a watchlist</div>
 				<div className="text-xs">Sign in to track Puzzles you care about</div>
 			</div>
-			<button>Sign in</button>
+			<button className="rounded-sm bg-blue-500 px-6 py-2 text-sm font-light text-white hover:bg-blue-600">
+				Sign in
+			</button>
 		</div>
 	);
 };

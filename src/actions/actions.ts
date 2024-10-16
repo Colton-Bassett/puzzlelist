@@ -8,14 +8,7 @@ import { revalidatePath } from "next/cache";
 // USER
 
 export async function createUser() {
-	// runs after auth0 sign in success
-	// how should the logic be?
-	// goal = link auth0 user to their postgres puzzlelist that's associated with their auth0 id
-	// ACTIONS
-	// add self-authored puzzles
-	// delete self-authored puzzles
-	// add existing puzzles
-	// remove existing puzzles
+	// tbd
 }
 
 export async function addPuzzleToUser(puzzleId: string) {
@@ -60,12 +53,6 @@ export async function getUserPuzzles() {
 
 	return [];
 }
-
-// PUZZLE
-// getuser from session
-// add creatorId to puzzle
-// addpuzzletouser?
-// change getAllPuzzles to get all EXCEPT where creatorId is not null
 
 export async function createPuzzle(formData: FormData) {
 	// Get session to identify the current user
@@ -112,18 +99,6 @@ export async function handleNewPuzzleSubmit(formData: FormData) {
 	} catch (error) {
 		console.error("Error creating puzzle or adding to user:", error);
 	}
-}
-
-// not implemented in UI
-export async function editPuzzle(formData: FormData, id: string) {
-	await prisma.puzzle.update({
-		where: { id },
-		data: {
-			iconUrl: formData.get("iconUrl") as string,
-			name: formData.get("name") as string,
-			url: formData.get("url") as string,
-		},
-	});
 }
 
 // check if puzzle creatorId !== null, delete from Puzzle table as well

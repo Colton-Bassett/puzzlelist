@@ -19,7 +19,7 @@ const MostFollowedPuzzles: React.FC<PuzzleProps> = async ({ puzzles }) => {
 					{puzzles.slice(0, 4).map((puzzle) => (
 						<li
 							key={puzzle.id + "m"}
-							className="flex h-24 items-center border-t border-gray-200"
+							className="flex h-24 items-center border-t border-gray-200 hover:bg-gray-50"
 						>
 							<div className="flex w-3/4 flex-col">
 								<div>img</div>
