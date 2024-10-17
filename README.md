@@ -22,7 +22,7 @@ TBD
 - [x] Refine UI
 - [x] Update schema for user created puzzles
 - [x] Add custom puzzle POST
-- [ ] Add puzzle DELETE when unfollowing user created puzzles
+- [x] Add puzzle DELETE when unfollowing user created puzzles
 - [ ] Filter mostFollowed and recommendedPuzzles to NOT show user created puzzles
 - [ ] Add error handling
 

@@ -101,7 +101,6 @@ export async function handleNewPuzzleSubmit(formData: FormData) {
 	}
 }
 
-// check if puzzle creatorId !== null, delete from Puzzle table as well
 export async function removePuzzleFromUser(puzzleId: string) {
 	// Get session to identify the current user
 	const session = await getSession();
@@ -124,6 +123,17 @@ export async function removePuzzleFromUser(puzzleId: string) {
 				where: {
 					userId: userFromDB.id,
 					puzzleId: puzzleId,
+				},
+			});
+		}
+
+		// check puzzle creatorId !== null, delete from Puzzle table as well
+		if (userFromDB) {
+			await prisma.puzzle.deleteMany({
+				where: {
+					// add soft validation
+					creatorId: { not: null },
+					id: puzzleId,
 				},
 			});
 		}
