@@ -22,7 +22,6 @@ const MostFollowedPuzzles: React.FC<PuzzleProps> = async ({ puzzles }) => {
 							className="flex h-24 items-center border-t border-gray-200 hover:bg-gray-50"
 						>
 							<div className="flex w-3/4 flex-col">
-								<div>img</div>
 								<div className="overflow-hidden text-ellipsis whitespace-nowrap">
 									{puzzle.name}
 								</div>

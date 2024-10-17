@@ -24,13 +24,16 @@ TBD
 - [x] Add custom puzzle POST
 - [x] Add puzzle DELETE when unfollowing user created puzzles
 - [x] Filter mostFollowed and recommendedPuzzles to NOT show user created puzzles
-- [ ] Fix signed-out page
+- [x] Fix signed-out page
+- [x] Add Mock 'Help' 'Send Feedback' 'Disclaimer' pages/routes
+- [x] Fix bottom card UI issues, spacing
 - [ ] Add error handling
+- [ ] Sanitize createNewPuzzle inputs
 
 - [ ] Add throttling for Follow/unfollow, complete/uncheck
-- [ ] Add Mock 'Help' 'Send Feedback' 'Disclaimer' pages/routes
-- [ ] Possibly refactor inneficient server action calls
-- [ ] Delete button, dndkit, routing, analytics, shadcn, server actions
+- [ ] Possibly refactor inefficient server action calls
+- [ ] Routing, analytics
+- [ ] Add API to fetch puzzle url icons
 
 ## Scripts
 

@@ -37,15 +37,16 @@ const RecommendedPuzzles: React.FC<PuzzleProps> = async ({ puzzles }) => {
 					{[...puzzles].map((puzzle) => (
 						<div
 							key={puzzle.id + "r"}
-							className="mb-3 mr-4 mt-1 h-[154px] w-40 min-w-40 cursor-pointer rounded-xl border border-gray-200 bg-white text-sm shadow-sm transition-shadow duration-300 hover:shadow-lg md:h-[242px]"
+							className="mb-3 mr-4 mt-1 h-[154px] w-40 min-w-40 cursor-pointer rounded-xl border border-gray-200 bg-white text-sm shadow-sm transition-shadow duration-300 hover:shadow-lg md:h-[242px] md:w-[170px] md:min-w-[170px]"
 						>
 							<div className="flex h-full flex-col px-3 py-2">
-								<div className="mr-3">img</div>
-								<div className="mb-5 flex">{puzzle.name}</div>
+								<div className="mb-2 flex text-lg md:mb-4 md:text-lg">
+									{puzzle.name}
+								</div>
 								<div className="flex max-h-28 overflow-hidden text-ellipsis text-wrap">
 									{puzzle.description}
 								</div>
-								<div className="mt-auto flex min-w-full justify-end">
+								<div className="mr-[-8px] mt-auto flex min-w-full justify-end">
 									<AddPuzzleButton
 										puzzleId={puzzle.id}
 										userPuzzles={userPuzzles}

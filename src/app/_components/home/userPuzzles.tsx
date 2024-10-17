@@ -24,6 +24,8 @@ const UserPuzzles: React.FC = async () => {
 							<a
 								href={puzzle.url}
 								className="flex h-14 w-full items-center text-left text-blue-500 hover:underline"
+								target="_blank" // Open new tab
+								rel="noopener noreferrer" // Security
 							>
 								{puzzle.url}
 							</a>
