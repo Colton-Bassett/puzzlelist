@@ -23,7 +23,8 @@ TBD
 - [x] Update schema for user created puzzles
 - [x] Add custom puzzle POST
 - [x] Add puzzle DELETE when unfollowing user created puzzles
-- [ ] Filter mostFollowed and recommendedPuzzles to NOT show user created puzzles
+- [x] Filter mostFollowed and recommendedPuzzles to NOT show user created puzzles
+- [ ] Fix signed-out page
 - [ ] Add error handling
 
 - [ ] Add throttling for Follow/unfollow, complete/uncheck

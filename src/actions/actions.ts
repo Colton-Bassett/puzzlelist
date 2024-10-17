@@ -7,6 +7,17 @@ import { revalidatePath } from "next/cache";
 
 // USER
 
+export async function getDefaultPuzzles() {
+	// get all puzzles EXCEPT ones a user has created
+	const defaultPuzzles = await prisma.puzzle.findMany({
+		where: {
+			// add soft validation
+			creatorId: null,
+		},
+	});
+	return defaultPuzzles;
+}
+
 export async function createUser() {
 	// tbd
 }

@@ -5,10 +5,10 @@ import UserPuzzles from "./_components/home/userPuzzles";
 import UserEngagementPrompt from "./_components/home/userEngagementPrompt";
 import CreateNewPuzzle from "./_components/home/createNewPuzzle";
 import AuthWrapper from "./_components/authWrapper";
+import { getDefaultPuzzles } from "@/actions/actions";
 
 export default async function Home() {
-	const puzzles = await prisma.puzzle.findMany();
-	// add prisma action to get user puzzles
+	const puzzles = await getDefaultPuzzles();
 
 	return (
 		<main className="flex h-full w-full flex-col">
@@ -21,7 +21,7 @@ export default async function Home() {
 					<UserEngagementPrompt />
 
 					<div className="mt-6 flex w-full flex-col md:flex-row">
-						<UserPuzzles puzzles={puzzles} />
+						<UserPuzzles />
 						<div className="mt-6 w-full md:mt-0 md:w-4/12">
 							<CreateNewPuzzle />
 							<MostFollowedPuzzles puzzles={puzzles} />

@@ -3,11 +3,7 @@ import { Puzzle } from "../../types";
 import AddPuzzleButton from "./addPuzzleButton";
 import CompletePuzzleCheckbox from "./completePuzzleCheckbox";
 
-interface PuzzleProps {
-	puzzles: Puzzle[];
-}
-
-const UserPuzzles: React.FC<PuzzleProps> = async ({}) => {
+const UserPuzzles: React.FC = async () => {
 	const userPuzzles = await getUserPuzzles();
 
 	return (
