@@ -15,7 +15,7 @@ const Disclaimer = () => {
 					The puzzles featured on this platform are added by a variety of
 					contributors and may vary in quality and complexity. While we make
 					every effort to ensure the accuracy and integrity of the content, we
-					cannot guarantee that all puzzles will meet every user's expectations.
+					cannot guarantee that all puzzles will meet everyones expectations.
 				</p>
 
 				<p className="mb-6">

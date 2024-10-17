@@ -1,5 +1,4 @@
 import { getUserPuzzles } from "@/actions/actions";
-import { Puzzle } from "../../types";
 import AddPuzzleButton from "./addPuzzleButton";
 import CompletePuzzleCheckbox from "./completePuzzleCheckbox";
 
