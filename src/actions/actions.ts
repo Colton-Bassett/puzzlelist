@@ -4,6 +4,7 @@ import prisma from "@/lib/db";
 import { getSession } from "@auth0/nextjs-auth0";
 import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 // USER
 
@@ -22,27 +23,61 @@ export async function createUser() {
 	// tbd
 }
 
+// export async function addPuzzleToUser(puzzleId: string) {
+// 	// todo add error handling on if adding existing user, puzzle relationship
+// 	const session = await getSession();
+// 	const user = session?.user;
+
+// 	if (user?.sub) {
+// 		const auth0Sub = user.sub;
+// 		console.log("addPuzzleToUser...");
+
+// 		const userFromDB = await prisma.user.findUnique({
+// 			where: { auth0Sub },
+// 		});
+
+// 		if (userFromDB) {
+// 			await prisma.userPuzzle.create({
+// 				data: {
+// 					userId: userFromDB.id,
+// 					puzzleId: puzzleId,
+// 				},
+// 			});
+// 		}
+// 	}
+// }
+
 export async function addPuzzleToUser(puzzleId: string) {
-	// todo add error handling on if adding existing user, puzzle relationship
+	// Get the session to identify the current user
 	const session = await getSession();
 	const user = session?.user;
 
-	if (user?.sub) {
-		const auth0Sub = user.sub;
-		console.log("addPuzzleToUser...");
+	if (!user?.sub) {
+		// If no session exists or user is not logged in, redirect to login
+		redirect("/api/auth/login");
+	}
+	const auth0Sub = user.sub;
 
+	try {
 		const userFromDB = await prisma.user.findUnique({
 			where: { auth0Sub },
 		});
 
 		if (userFromDB) {
+			// Add the puzzle to the user's UserPuzzle list
 			await prisma.userPuzzle.create({
 				data: {
 					userId: userFromDB.id,
 					puzzleId: puzzleId,
 				},
 			});
+			return { success: true, message: "Puzzle added successfully." };
+		} else {
+			throw new Error("User not found in the database.");
 		}
+	} catch (error) {
+		console.error("Error adding puzzle:", error);
+		throw new Error("Failed to add puzzle. Please try again.");
 	}
 }
 
@@ -101,6 +136,13 @@ export async function createPuzzle(formData: FormData) {
 }
 
 export async function handleNewPuzzleSubmit(formData: FormData) {
+	const session = await getSession();
+	const user = session?.user;
+
+	if (!user?.sub) {
+		// If no session exists or user is not logged in, redirect to login
+		redirect("/api/auth/login");
+	}
 	try {
 		const newPuzzle = await createPuzzle(formData);
 

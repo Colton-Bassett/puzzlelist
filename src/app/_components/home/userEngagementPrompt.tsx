@@ -26,16 +26,19 @@ export default async function UserEngagementPrompt() {
 					<div className="text-xs">Track the daily puzzles you care about</div>
 				</div>
 			) : (
-				<div>
+				<div className="flex w-full">
 					<div className="ml-6 flex-1 flex-col">
 						<div className="text-sm">Build a checklist</div>
 						<div className="text-xs">
 							Sign in to track Puzzles you care about
 						</div>
 					</div>
-					<button className="rounded-sm bg-blue-500 px-6 py-2 text-sm font-light text-white hover:bg-blue-600">
+					<a
+						href="/api/auth/login"
+						className="rounded-sm bg-blue-500 px-6 py-2 text-sm font-light text-white hover:bg-blue-600"
+					>
 						Sign in
-					</button>
+					</a>
 				</div>
 			)}
 		</div>

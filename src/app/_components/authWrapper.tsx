@@ -5,15 +5,16 @@ export default async function AuthWrapper({
 }: {
 	children: React.ReactNode;
 }) {
-	const session = await getSession();
+	// const session = await getSession();
 
-	if (session?.user) {
-		return <>{children}</>;
-	} else {
-		return (
-			<div className="flex h-screen w-screen items-start justify-center">
-				<span className="m-24 text-2xl">Please Sign In</span>
-			</div>
-		);
-	}
+	// if (session?.user) {
+	// 	return <>{children}</>;
+	// } else {
+	// 	return (
+	// 		<div className="flex h-screen w-screen items-start justify-center">
+	// 			<span className="m-24 text-2xl">Please Sign In</span>
+	// 		</div>
+	// 	);
+	// }
+	return <>{children}</>;
 }

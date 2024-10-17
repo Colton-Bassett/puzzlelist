@@ -4,15 +4,15 @@ export default function Footer() {
 			<div className="m-auto mt-4 flex w-full max-w-5xl px-4 pb-5 pt-5 sm:px-6 md:px-12 md:pb-9 md:pt-9">
 				<div className="flex w-full items-center">
 					<a href="/" className="text-xl">
-						<span className="text-gray-600">Puzzle List</span>
+						Puzzle List
 					</a>
-					<a href="/" className="ml-10">
+					<a href="/help" className="ml-10 hover:text-gray-900">
 						Help
 					</a>
-					<a href="/" className="ml-10">
+					<a href="/feedback" className="ml-10 hover:text-gray-900">
 						Send Feedback
 					</a>
-					<a href="/" className="ml-10">
+					<a href="/disclaimer" className="ml-10 hover:text-gray-900">
 						Disclaimer
 					</a>
 				</div>

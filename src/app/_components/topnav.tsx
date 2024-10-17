@@ -5,9 +5,9 @@ export default async function TopNav() {
 	const user = session?.user;
 
 	return (
-		<nav className="flex h-16 w-full items-center justify-between p-5 px-6 text-xl font-semibold">
-			<div className="flex-1">
-				<span className="text-gray-600">Puzzle List</span>
+		<nav className="flex h-16 w-full items-center justify-between p-5 px-6 font-semibold">
+			<div className="flex-1 text-xl">
+				<a href="/">Puzzle List</a>
 			</div>
 
 			{user ? (

@@ -1,4 +1,3 @@
-import prisma from "@/lib/db";
 import RecommendedPuzzles from "./_components/home/recommendedPuzzles";
 import MostFollowedPuzzles from "./_components/home/mostFollowedPuzzles";
 import UserPuzzles from "./_components/home/userPuzzles";
@@ -6,6 +5,7 @@ import UserEngagementPrompt from "./_components/home/userEngagementPrompt";
 import CreateNewPuzzle from "./_components/home/createNewPuzzle";
 import AuthWrapper from "./_components/authWrapper";
 import { getDefaultPuzzles } from "@/actions/actions";
+import LandingImage from "./_components/landingImage";
 
 export default async function Home() {
 	const puzzles = await getDefaultPuzzles();
@@ -13,10 +13,7 @@ export default async function Home() {
 	return (
 		<main className="flex h-full w-full flex-col">
 			<AuthWrapper>
-				<div className="min-h-full min-w-full">
-					<div className="h-20 bg-[#F8F9FA]"></div>
-					<div className="h-40 bg-[url(/landingpage.svg)] bg-bottom bg-no-repeat"></div>
-				</div>
+				<LandingImage />
 				<div className="m-auto flex h-full w-full max-w-5xl flex-col px-4 pb-6 sm:px-6 md:px-12">
 					<UserEngagementPrompt />
 
