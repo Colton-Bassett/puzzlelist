@@ -29,9 +29,9 @@ TBD
 - [x] Fix bottom card UI issues, spacing
 - [x] Sanitize createNewPuzzle inputs and validate URLs
 - [x] Add createUser to actions.ts
+- [x] Clean up console.log statements
 - [ ] Add error handling
 - [ ] Sort out auth0 development keys swap
-- [ ] Clean up console.log statements
 
 - [ ] Add throttling for Follow/unfollow, complete/uncheck
 - [ ] Possibly refactor inefficient server action calls

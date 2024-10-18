@@ -20,13 +20,13 @@ const CompletePuzzleCheckbox: React.FC<AddPuzzleButtonProps> = ({
 }) => {
 	const [isChecked, setIsChecked] = useState(completed);
 
+	// Set puzzle completed status
 	const handleCheckboxChange = async (
 		e: React.ChangeEvent<HTMLInputElement>,
 	) => {
 		const newCompletedStatus = e.target.checked;
 		setIsChecked(newCompletedStatus);
 
-		// Call the action to update the completion status
 		await updatePuzzleCompletionStatus(puzzleId, newCompletedStatus);
 	};
 

@@ -7,10 +7,9 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export async function getDefaultPuzzles() {
-	// get all puzzles EXCEPT ones a user has created
+	// Get all puzzles EXCEPT ones a user has created
 	const defaultPuzzles = await prisma.puzzle.findMany({
 		where: {
-			// add soft validation
 			creatorId: null,
 		},
 	});
@@ -19,7 +18,7 @@ export async function getDefaultPuzzles() {
 
 export async function createUser(session: Session) {
 	if (session.user) {
-		console.log("auth0 user found", session.user);
+		// console.log("auth0 user found", session.user);
 		const user = session.user;
 
 		const existingUser = await prisma.user.findUnique({
@@ -29,8 +28,8 @@ export async function createUser(session: Session) {
 		});
 
 		if (!existingUser) {
-			console.log("creating new user");
 			// Create new user
+			console.log("creating new user");
 			const newUser = await prisma.user.create({
 				data: {
 					name: user.name,
@@ -56,7 +55,7 @@ export async function addPuzzleToUser(puzzleId: string) {
 	const user = session?.user;
 
 	if (!user?.sub) {
-		// If no session exists or user is not logged in, redirect to login
+		// User not logged in, redirect to login
 		redirect("/api/auth/login");
 	}
 	const auth0Sub = user.sub;
@@ -92,6 +91,7 @@ export async function getUserPuzzles() {
 	if (user?.sub) {
 		const auth0Sub = user.sub;
 
+		// Find user in the database
 		const userFromDB = await prisma.user.findUnique({
 			where: { auth0Sub },
 			include: { userPuzzles: { include: { puzzle: true } } },
@@ -111,7 +111,7 @@ export async function createPuzzle(name: string, url: string) {
 	if (user?.sub) {
 		const auth0Sub = user.sub;
 
-		// Find the user in the database
+		// Find user in the database
 		const userFromDB = await prisma.user.findUnique({
 			where: { auth0Sub },
 		});
@@ -124,17 +124,17 @@ export async function createPuzzle(name: string, url: string) {
 					creatorId: userFromDB?.id,
 				},
 			});
-			// refresh ui to display new puzzles
+			// Refresh ui to display new puzzles
 			revalidatePath("/");
 			return newPuzzle;
 		} catch (error) {
 			if (error instanceof Prisma.PrismaClientKnownRequestError) {
-				console.log("Prisma error:", error.code);
+				console.log("prisma error:", error.code);
 			}
 			throw error;
 		}
 	} else {
-		console.log("user sub error");
+		console.log("auth0 user error");
 	}
 }
 
@@ -152,7 +152,7 @@ export async function handleNewPuzzleSubmit(formData: FormData) {
 	const name = sanitizeInput(formData.get("name") as string);
 	const url = sanitizeInput(formData.get("url") as string);
 
-	// Validate urls
+	// Validate url
 	if (!isValidURL(url)) {
 		console.error("Invalid URL format in handleNewPuzzleSubmit");
 		return;
@@ -176,17 +176,16 @@ export async function removePuzzleFromUser(puzzleId: string) {
 
 	if (user?.sub) {
 		const auth0Sub = user.sub;
-		console.log("removePuzzleFromUser...");
+		console.log("removePuzzleFromUser ...");
 
 		// Find the user in the database
 		const userFromDB = await prisma.user.findUnique({
 			where: { auth0Sub },
 		});
 
-		console.log(userFromDB?.id, puzzleId);
-
+		// Find user in the database
 		if (userFromDB) {
-			// Delete the UserPuzzle entry that links the user and the puzzle
+			// Delete the UserPuzzle entry that links user and the puzzle
 			await prisma.userPuzzle.deleteMany({
 				where: {
 					userId: userFromDB.id,
@@ -195,7 +194,7 @@ export async function removePuzzleFromUser(puzzleId: string) {
 			});
 		}
 
-		// check puzzle creatorId !== null, delete from Puzzle table as well
+		// Check if puzzle created by user, delete from Puzzle table as well
 		if (userFromDB) {
 			await prisma.puzzle.deleteMany({
 				where: {
@@ -232,7 +231,7 @@ export async function updatePuzzleCompletionStatus(
 					puzzleId: puzzleId,
 				},
 				data: {
-					completed: completed, // Update the completion status
+					completed: completed,
 				},
 			});
 		}
@@ -243,7 +242,7 @@ export async function updatePuzzleCompletionStatus(
 
 function sanitizeInput(input: string): string {
 	const trimmedInput = input.trim();
-	// Basic HTML escaping to prevent XSS (you can expand this as needed)
+	// Basic HTML escaping to prevent XSS (could be expanded)
 	const sanitizedInput = trimmedInput
 		.replace(/</g, "&lt;")
 		.replace(/>/g, "&gt;")

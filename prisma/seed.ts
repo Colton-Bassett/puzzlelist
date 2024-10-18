@@ -38,14 +38,14 @@ const initialPuzzles = [
 	},
 ];
 async function main() {
-	console.log("Start seeding ...");
+	console.log("Start seeding db ...");
 	for (const puzzle of initialPuzzles) {
 		const newPuzzle = await prisma.puzzle.create({
 			data: puzzle,
 		});
 		console.log("Created puzzle with id:", `${newPuzzle.id}`);
 	}
-	console.log("Seeding finished");
+	console.log("Seeding db finished");
 }
 main()
 	.then(async () => {

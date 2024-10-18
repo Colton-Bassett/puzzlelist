@@ -15,6 +15,7 @@ export const GET = handleAuth({
 	},
 });
 
+// Runs right after auth0 login, before refresh
 const afterCallback = async (req: NextRequest, session: Session) => {
 	// Check to see if user exists in db. If not, create it.
 	createUser(session);
