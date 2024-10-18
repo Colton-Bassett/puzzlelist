@@ -8,35 +8,34 @@ TBD
 - [x] Setup environment
 - [x] Scaffold basic UI
 - [x] Setup mock data
-- [x] Setup basic Prisma SQLite database
-- [x] Update to Prisma Postgresql database
+- [x] Setup Prisma SQLite --> Postgres database
 - [x] Deploy on Vercel
 - [x] Setup Prisma seeding & migration
 - [x] Add authentication (Auth0)
 - [x] Connect users to database
 - [x] Refine schema
 - [x] Add Shadcn
-- [x] Add follow/unfollow puzzle
-- [x] Add complete/uncheck puzzle input
-- [x] Add mobile UI
+- [x] Add Follow/unfollow puzzle
+- [x] Add Complete/uncheck puzzle input
 - [x] Refine UI
-- [x] Update schema for user created puzzles
-- [x] Add custom puzzle POST
-- [x] Add puzzle DELETE when unfollowing user created puzzles
-- [x] Filter mostFollowed and recommendedPuzzles to NOT show user created puzzles
-- [x] Fix signed-out page
-- [x] Add Mock 'Help' 'Send Feedback' 'Disclaimer' pages/routes
-- [x] Fix bottom card UI issues, spacing
-- [x] Sanitize createNewPuzzle inputs and validate URLs
-- [x] Add createUser to actions.ts
-- [x] Clean up console.log statements
-- [ ] Add error handling
-- [ ] Sort out auth0 development keys swap
+- [x] Refine mobile UI
+- [x] Refine schema (user created puzzles)
+- [x] Add custom puzzle POST, DELETE
+- [x] Make Signed-out page work
+- [x] Add 'Help' 'Send Feedback' 'Disclaimer' pages/routes
+- [x] Add Sanitization/Validation to new puzzle submissions
+- [ ] Refine server-side error handling
+- [ ] Setup Google Project in Google Cloud Console to enable oauth /w auth0 (in production)
+- [ ] Setup Github Project to enable login /w auth0 (in production)
+- [x] Clean up console.log statements and comments
 
-- [ ] Add throttling for Follow/unfollow, complete/uncheck
-- [ ] Possibly refactor inefficient server action calls
-- [ ] Routing, analytics
+## Extras
+
 - [ ] Add API to fetch puzzle url icons
+- [ ] Refine client-side error handling
+- [ ] Add throttling for follow/unfollow, complete/uncheck puzzle actions
+- [ ] Improve efficiency of server action calls by refactoring things
+- [ ] Add analytics
 
 ## Scripts
 

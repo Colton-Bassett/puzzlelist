@@ -7,13 +7,19 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export async function getDefaultPuzzles() {
-	// Get all puzzles EXCEPT ones a user has created
-	const defaultPuzzles = await prisma.puzzle.findMany({
-		where: {
-			creatorId: null,
-		},
-	});
-	return defaultPuzzles;
+	try {
+		// Get all puzzles EXCEPT ones a user has created
+		const defaultPuzzles = await prisma.puzzle.findMany({
+			where: {
+				creatorId: null,
+			},
+		});
+		return defaultPuzzles;
+	} catch (error) {
+		console.error("Error fetching default puzzles:", error);
+		// Return an empty array as a fallback
+		return [];
+	}
 }
 
 export async function createUser(session: Session) {
@@ -45,7 +51,7 @@ export async function createUser(session: Session) {
 			console.log("user exists in db");
 		}
 	} else {
-		console.log("auth0 user not found", session);
+		console.error("auth0 user not found", session);
 	}
 }
 
@@ -73,35 +79,43 @@ export async function addPuzzleToUser(puzzleId: string) {
 					puzzleId: puzzleId,
 				},
 			});
+			console.log(
+				`Added puzzle with ID ${puzzleId} to user with ID ${userFromDB.id}.`,
+			);
 			return { success: true, message: "Puzzle added successfully." };
 		} else {
-			throw new Error("User not found in the database.");
+			console.error("User not found in database");
 		}
 	} catch (error) {
 		console.error("Error adding puzzle:", error);
-		throw new Error("Failed to add puzzle. Please try again.");
 	}
 }
 
 export async function getUserPuzzles() {
-	// Get session to identify the current user
-	const session = await getSession();
-	const user = session?.user;
+	try {
+		// Get session to identify the current user
+		const session = await getSession();
+		const user = session?.user;
 
-	if (user?.sub) {
-		const auth0Sub = user.sub;
+		if (user?.sub) {
+			const auth0Sub = user.sub;
 
-		// Find user in the database
-		const userFromDB = await prisma.user.findUnique({
-			where: { auth0Sub },
-			include: { userPuzzles: { include: { puzzle: true } } },
-		});
+			// Find user in the database
+			const userFromDB = await prisma.user.findUnique({
+				where: { auth0Sub },
+				include: { userPuzzles: { include: { puzzle: true } } },
+			});
 
-		const data = userFromDB?.userPuzzles || [];
-		return data;
+			// If user is found, return their puzzles
+			return userFromDB?.userPuzzles || [];
+		}
+
+		// If no user is found, return an empty array
+		return [];
+	} catch (error) {
+		console.error("Error fetching user puzzles:", error);
+		return [];
 	}
-
-	return [];
 }
 
 export async function createPuzzle(name: string, url: string) {
@@ -129,12 +143,12 @@ export async function createPuzzle(name: string, url: string) {
 			return newPuzzle;
 		} catch (error) {
 			if (error instanceof Prisma.PrismaClientKnownRequestError) {
-				console.log("prisma error:", error.code);
+				console.error("prisma error:", error.code);
 			}
 			throw error;
 		}
 	} else {
-		console.log("auth0 user error");
+		console.error("auth0 user error");
 	}
 }
 
@@ -170,40 +184,52 @@ export async function handleNewPuzzleSubmit(formData: FormData) {
 }
 
 export async function removePuzzleFromUser(puzzleId: string) {
-	// Get session to identify the current user
-	const session = await getSession();
-	const user = session?.user;
+	try {
+		// Get session to identify the current user
+		const session = await getSession();
+		const user = session?.user;
 
-	if (user?.sub) {
-		const auth0Sub = user.sub;
-		console.log("removePuzzleFromUser ...");
+		if (user?.sub) {
+			const auth0Sub = user.sub;
+			console.log("removePuzzleFromUser ...");
 
-		// Find the user in the database
-		const userFromDB = await prisma.user.findUnique({
-			where: { auth0Sub },
-		});
-
-		// Find user in the database
-		if (userFromDB) {
-			// Delete the UserPuzzle entry that links user and the puzzle
-			await prisma.userPuzzle.deleteMany({
-				where: {
-					userId: userFromDB.id,
-					puzzleId: puzzleId,
-				},
+			// Find the user in the database
+			const userFromDB = await prisma.user.findUnique({
+				where: { auth0Sub },
 			});
-		}
 
-		// Check if puzzle created by user, delete from Puzzle table as well
-		if (userFromDB) {
-			await prisma.puzzle.deleteMany({
-				where: {
-					// add soft validation
-					creatorId: { not: null },
-					id: puzzleId,
-				},
-			});
+			if (userFromDB) {
+				// Delete the UserPuzzle entry that links user and the puzzle
+				await prisma.userPuzzle.deleteMany({
+					where: {
+						userId: userFromDB.id,
+						puzzleId: puzzleId,
+					},
+				});
+
+				// Check if puzzle was created by user, then delete from Puzzle table as well
+				const puzzleDeleted = await prisma.puzzle.deleteMany({
+					where: {
+						creatorId: userFromDB.id, // Check if the user is the creator
+						id: puzzleId,
+					},
+				});
+
+				if (puzzleDeleted.count > 0) {
+					console.log(`User created puzzle with ID ${puzzleId} deleted.`);
+				} else {
+					console.log(`Removed default puzzle with ID ${puzzleId}.`);
+				}
+			} else {
+				console.warn(
+					`User not found in the database for auth0Sub: ${auth0Sub}`,
+				);
+			}
+		} else {
+			console.warn("User session not found.");
 		}
+	} catch (error) {
+		console.error("Error removing puzzle from user:", error);
 	}
 }
 
@@ -211,30 +237,50 @@ export async function updatePuzzleCompletionStatus(
 	puzzleId: string,
 	completed: boolean,
 ) {
-	// Get session to identify the current user
-	const session = await getSession();
-	const user = session?.user;
+	try {
+		// Get session to identify the current user
+		const session = await getSession();
+		const user = session?.user;
 
-	if (user?.sub) {
-		const auth0Sub = user.sub;
+		if (user?.sub) {
+			const auth0Sub = user.sub;
 
-		// Find the user in the database
-		const userFromDB = await prisma.user.findUnique({
-			where: { auth0Sub },
-		});
-
-		if (userFromDB) {
-			// Update the UserPuzzle entry's 'completed' status
-			await prisma.userPuzzle.updateMany({
-				where: {
-					userId: userFromDB.id,
-					puzzleId: puzzleId,
-				},
-				data: {
-					completed: completed,
-				},
+			// Find the user in the database
+			const userFromDB = await prisma.user.findUnique({
+				where: { auth0Sub },
 			});
+
+			if (userFromDB) {
+				// Update the UserPuzzle entry's 'completed' status
+				const updateResult = await prisma.userPuzzle.updateMany({
+					where: {
+						userId: userFromDB.id,
+						puzzleId: puzzleId,
+					},
+					data: {
+						completed: completed,
+					},
+				});
+
+				if (updateResult.count === 0) {
+					console.warn(
+						`No UserPuzzle entry found for user ${userFromDB.id} and puzzle ${puzzleId}.`,
+					);
+				} else {
+					console.log(
+						`Updated completion status for puzzle ${puzzleId} to ${completed}.`,
+					);
+				}
+			} else {
+				console.warn(
+					`User not found in the database for auth0Sub: ${auth0Sub}`,
+				);
+			}
+		} else {
+			console.warn("User session not found.");
 		}
+	} catch (error) {
+		console.error("Error updating puzzle completion status:", error);
 	}
 }
 

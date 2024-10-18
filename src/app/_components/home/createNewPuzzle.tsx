@@ -70,7 +70,7 @@ export function CreatePuzzleDialog() {
 					<textarea
 						name="url"
 						rows={5}
-						placeholder="http://example.com"
+						placeholder="https://example.com"
 						className="resize-none rounded-sm border border-gray-200 px-2 py-1 focus:outline-none"
 					/>
 					<DialogFooter>

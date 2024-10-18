@@ -15,7 +15,7 @@ const UserPuzzles: React.FC = async () => {
 						className="flex h-14 items-center border-t border-gray-200 hover:bg-gray-50"
 					>
 						<div className="flex min-w-36">
-							<div className="mr-3 flex w-10 items-center justify-center">
+							<div className="mr-3 flex items-center justify-center">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									fill="none"
