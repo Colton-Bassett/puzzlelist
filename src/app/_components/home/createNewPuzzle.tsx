@@ -53,8 +53,8 @@ export function CreatePuzzleDialog() {
 				<DialogHeader>
 					<DialogTitle>Create puzzle</DialogTitle>
 					<DialogDescription>
-						Make a new puzzle. It will be added to your Puzzle List when you are
-						done.
+						Make a new puzzle with a name and valid URL. It will be added to
+						your checklist when you are done.
 					</DialogDescription>
 				</DialogHeader>
 				<form
@@ -70,8 +70,8 @@ export function CreatePuzzleDialog() {
 					<textarea
 						name="url"
 						rows={5}
-						placeholder="Url"
-						className="rounded-sm border border-gray-200 px-2 py-1 focus:outline-none"
+						placeholder="http://example.com"
+						className="resize-none rounded-sm border border-gray-200 px-2 py-1 focus:outline-none"
 					/>
 					<DialogFooter>
 						<DialogTrigger asChild>

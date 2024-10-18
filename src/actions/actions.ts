@@ -1,12 +1,10 @@
 "use server";
 
 import prisma from "@/lib/db";
-import { getSession } from "@auth0/nextjs-auth0";
+import { getSession, Session } from "@auth0/nextjs-auth0";
 import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-
-// USER
 
 export async function getDefaultPuzzles() {
 	// get all puzzles EXCEPT ones a user has created
@@ -19,33 +17,38 @@ export async function getDefaultPuzzles() {
 	return defaultPuzzles;
 }
 
-export async function createUser() {
-	// tbd
+export async function createUser(session: Session) {
+	if (session.user) {
+		console.log("auth0 user found", session.user);
+		const user = session.user;
+
+		const existingUser = await prisma.user.findUnique({
+			where: {
+				auth0Sub: user.sub,
+			},
+		});
+
+		if (!existingUser) {
+			console.log("creating new user");
+			// Create new user
+			const newUser = await prisma.user.create({
+				data: {
+					name: user.name,
+					auth0Sub: user.sub,
+					userPuzzles: {
+						create: [],
+					},
+				},
+			});
+
+			console.log("new user created", newUser);
+		} else {
+			console.log("user exists in db");
+		}
+	} else {
+		console.log("auth0 user not found", session);
+	}
 }
-
-// export async function addPuzzleToUser(puzzleId: string) {
-// 	// todo add error handling on if adding existing user, puzzle relationship
-// 	const session = await getSession();
-// 	const user = session?.user;
-
-// 	if (user?.sub) {
-// 		const auth0Sub = user.sub;
-// 		console.log("addPuzzleToUser...");
-
-// 		const userFromDB = await prisma.user.findUnique({
-// 			where: { auth0Sub },
-// 		});
-
-// 		if (userFromDB) {
-// 			await prisma.userPuzzle.create({
-// 				data: {
-// 					userId: userFromDB.id,
-// 					puzzleId: puzzleId,
-// 				},
-// 			});
-// 		}
-// 	}
-// }
 
 export async function addPuzzleToUser(puzzleId: string) {
 	// Get the session to identify the current user
@@ -82,6 +85,7 @@ export async function addPuzzleToUser(puzzleId: string) {
 }
 
 export async function getUserPuzzles() {
+	// Get session to identify the current user
 	const session = await getSession();
 	const user = session?.user;
 
@@ -100,7 +104,7 @@ export async function getUserPuzzles() {
 	return [];
 }
 
-export async function createPuzzle(formData: FormData) {
+export async function createPuzzle(name: string, url: string) {
 	// Get session to identify the current user
 	const session = await getSession();
 	const user = session?.user;
@@ -114,10 +118,9 @@ export async function createPuzzle(formData: FormData) {
 		try {
 			const newPuzzle = await prisma.puzzle.create({
 				data: {
-					// add soft validation
 					iconUrl: "https://example.com",
-					name: formData.get("name") as string,
-					url: formData.get("url") as string,
+					name: name,
+					url: url,
 					creatorId: userFromDB?.id,
 				},
 			});
@@ -136,6 +139,7 @@ export async function createPuzzle(formData: FormData) {
 }
 
 export async function handleNewPuzzleSubmit(formData: FormData) {
+	// Get session to identify the current user
 	const session = await getSession();
 	const user = session?.user;
 
@@ -143,8 +147,19 @@ export async function handleNewPuzzleSubmit(formData: FormData) {
 		// If no session exists or user is not logged in, redirect to login
 		redirect("/api/auth/login");
 	}
+
+	// Sanitize inputs
+	const name = sanitizeInput(formData.get("name") as string);
+	const url = sanitizeInput(formData.get("url") as string);
+
+	// Validate urls
+	if (!isValidURL(url)) {
+		console.error("Invalid URL format in handleNewPuzzleSubmit");
+		return;
+	}
+
 	try {
-		const newPuzzle = await createPuzzle(formData);
+		const newPuzzle = await createPuzzle(name, url);
 
 		if (newPuzzle?.id) {
 			await addPuzzleToUser(newPuzzle.id);
@@ -222,4 +237,22 @@ export async function updatePuzzleCompletionStatus(
 			});
 		}
 	}
+}
+
+// UTILS
+
+function sanitizeInput(input: string): string {
+	const trimmedInput = input.trim();
+	// Basic HTML escaping to prevent XSS (you can expand this as needed)
+	const sanitizedInput = trimmedInput
+		.replace(/</g, "&lt;")
+		.replace(/>/g, "&gt;")
+		.replace(/"/g, "&quot;")
+		.replace(/'/g, "&#039;");
+	return sanitizedInput;
+}
+
+function isValidURL(url: string): boolean {
+	const urlRegex = /^(https?:\/\/[^\s$.?#].[^\s]*)$/i;
+	return urlRegex.test(url);
 }

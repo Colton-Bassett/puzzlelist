@@ -1,11 +1,7 @@
-import prisma from "@/lib/db";
+import { createUser } from "@/actions/actions";
 import { handleAuth, Session, handleCallback } from "@auth0/nextjs-auth0";
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest } from "next/server";
-
-// TODO add error handling. Think about response numbers. Possibly move afterCallback to actions.ts
-
-// export const GET = handleAuth();
 
 export const GET = handleAuth({
 	callback: async (req: NextApiRequest, res: NextApiResponse) => {
@@ -20,39 +16,7 @@ export const GET = handleAuth({
 });
 
 const afterCallback = async (req: NextRequest, session: Session) => {
-	console.log("I am getting called after callback", session);
-	if (session.user) {
-		// permanentRedirect('/verify-email')
-		// res.status(200).redirect('/verify-email')
-		console.log("user found", session.user);
-		const user = session.user;
-
-		const existingUser = await prisma.user.findUnique({
-			where: {
-				auth0Sub: user.sub,
-			},
-		});
-
-		if (!existingUser) {
-			console.log("creating new user");
-			// Create new user
-			const newUser = await prisma.user.create({
-				data: {
-					name: user.name,
-					auth0Sub: user.sub,
-					userPuzzles: {
-						create: [],
-					},
-				},
-			});
-
-			console.log("new user created", newUser);
-		} else {
-			console.log("user exists in db");
-		}
-	} else {
-		console.log("user not found", session);
-	}
-
+	// Check to see if user exists in db. If not, create it.
+	createUser(session);
 	return session;
 };

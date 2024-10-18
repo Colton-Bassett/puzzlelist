@@ -27,8 +27,11 @@ TBD
 - [x] Fix signed-out page
 - [x] Add Mock 'Help' 'Send Feedback' 'Disclaimer' pages/routes
 - [x] Fix bottom card UI issues, spacing
+- [x] Sanitize createNewPuzzle inputs and validate URLs
+- [x] Add createUser to actions.ts
 - [ ] Add error handling
-- [ ] Sanitize createNewPuzzle inputs
+- [ ] Sort out auth0 development keys swap
+- [ ] Clean up console.log statements
 
 - [ ] Add throttling for Follow/unfollow, complete/uncheck
 - [ ] Possibly refactor inefficient server action calls
