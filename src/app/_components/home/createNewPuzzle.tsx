@@ -14,7 +14,7 @@ const CreateNewPuzzle: React.FC = () => {
 		<div className="mb-4 rounded-xl border border-gray-200 p-4 md:ml-6">
 			<div className="flex">
 				<div className="mr-3 flex items-center justify-center">
-					<div className="rounded-md bg-blue-100 p-2">
+					<div className="rounded-md bg-blue-50 p-2">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
