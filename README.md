@@ -2,7 +2,7 @@
 
 [Puzzle List](https://puzzlelist.vercel.app/) is a daily tracker app for online puzzles like Wordle and Connections. Users can create lists of their favorite puzzles and track their completion.
 
-Built with [Next.js](https://nextjs.org/), it leverages newer [server actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) for a separation of server and client code. The app uses Google and GitHub OAuth login via [Auth0](https://auth0.com/), along with a custom Puzzle API. User and puzzle data are stored in [Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres) using [Prisma](https://www.prisma.io/). For styling and some UI components, Puzzle List uses [Tailwind](https://tailwindcss.com/) and [Shadcn](https://ui.shadcn.com/).
+Built with [Next.js](https://nextjs.org/), it leverages newer [server actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) for a separation of server and client code. The app uses Google and GitHub OAuth login via [Auth0](https://auth0.com/), along with a custom Puzzle API. User and puzzle data are stored in [Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres) using [Prisma](https://www.prisma.io/). For styling and some UI components, Puzzle List uses [Tailwind](https://tailwindcss.com/) and [Shadcn](https://ui.shadcn.com/). For fast node package management, Puzzle List uses [pnpm](https://pnpm.io/).
 
 ## Todo
 
