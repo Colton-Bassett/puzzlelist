@@ -33,11 +33,11 @@ const RecommendedPuzzles: React.FC<PuzzleProps> = async ({ puzzles }) => {
 					</div>
 				</div>
 
-				<div className="flex overflow-auto whitespace-nowrap">
+				<div className="flex justify-around gap-4 overflow-auto whitespace-nowrap">
 					{[...puzzles].map((puzzle) => (
 						<div
 							key={puzzle.id + "r"}
-							className="mb-3 mr-4 mt-1 h-[154px] w-40 min-w-40 cursor-pointer rounded-xl border border-gray-200 bg-white text-sm shadow-sm transition-shadow duration-300 hover:shadow-lg md:h-[242px] md:w-[170px] md:min-w-[170px]"
+							className="mb-3 mt-1 h-[154px] w-40 min-w-40 cursor-pointer rounded-xl border border-gray-200 bg-white text-sm shadow-sm transition-shadow duration-300 hover:shadow-lg md:h-[242px] md:w-[170px] md:min-w-[170px]"
 						>
 							<div className="flex h-full flex-col px-3 py-2">
 								<div className="mb-2 flex text-lg md:mb-4 md:text-lg">
